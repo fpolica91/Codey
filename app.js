@@ -3,10 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const socket = require('./socket/socket');
+
+mongoose
+  .connect('mongodb://localhost/undefined', {useNewUrlParser: true})
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  })
+  .catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
 
 var app = express()
 app.io = require("socket.io")()
@@ -25,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
-  res.heander("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
 
