@@ -1,0 +1,52 @@
+<title>Codey</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="stylesheets/chatroom.css">
+
+
+<div class="window">
+    <div class="top_menu">
+        <div class="buttons">
+            <div class="button close"></div>
+            <div class="button minimize"></div>
+            <div class="button maximize"></div>
+        </div>
+        <div class="title">Chat</div>
+    </div>
+    <ul id="messages" class="messages">
+
+    </ul>
+
+    <div class="bottom_wrapper clearfix">
+        <i id="typing"></i>
+        <form id="form">
+            <div class="message_input_wrapper">
+                <input id="message" class="message_input" placeholder="Type your message here..." />
+            </div>
+            <button class="send_message">
+                Send
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<div>
+</div>
+
+
+
+<div class="editor">
+    <textarea id="html" placeholder="HTML"></textarea>
+    <textarea id="css" placeholder="CSS"></textarea>
+    <textarea id="js" placeholder="JavaScript"></textarea>
+    <button id="runButton">RUN CODE</button>
+    <div id="compilerText"></div>
+
+</div>
+
+
+
+<script src="javascripts/compiler.js"></script>
+<script src="javascripts/socket.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
+<script src="javascripts/chat.js"></script>
