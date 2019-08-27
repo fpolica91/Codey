@@ -1,5 +1,6 @@
-
-
+const mongoose = require('mongoose')
+const Room = require('../models/Room')
+const User = require("../models/User")
 
 function socket(io) {
     io.on('connection', (socket) => {
@@ -8,6 +9,11 @@ function socket(io) {
             socket.broadcast.emit("received", {
                 message: msg
             })
+            Room.create({
+                name: "Room Name",
+                message: msg
+            }).then(data => console.log(data))
+                .catch(err => next(err))
         })
 
         socket.on('send-code', message => {
@@ -19,10 +25,6 @@ function socket(io) {
                 data
             })
         })
-
-
-
-
 
         socket.on('disconnect', data => {
             console.log('user disconnected')

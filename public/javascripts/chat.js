@@ -50,8 +50,8 @@ socket.on('code-message', message => {
 
 
     // fetching initial chat messages from the database
-    (async function () {
-        await fetch("/chats")
+    (function () {
+        fetch("/chats")
             .then(data => {
                 return data.json();
             })
