@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
+const hbs = require('hbs');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const chatroom = require('./routes/chatroom')
 const socket = require('./socket/socket');
 
 mongoose
@@ -34,18 +36,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use((req, res, next) => {
+  //res.setHeader("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
+
+app.use('/chats', chatroom);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function (err, req, res, next) {
