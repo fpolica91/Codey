@@ -12,7 +12,7 @@ const chatroom = require('./routes/chatroom')
 const socket = require('./socket/socket');
 
 mongoose
-  .connect('mongodb://localhost/undefined', {useNewUrlParser: true})
+  .connect('mongodb://localhost/undefined', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,26 +35,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-<<<<<<< HEAD
-app.use((req, res, next) => {
-  //res.setHeader("Content-Type", "application/json");
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
-  next()
-})
-=======
+// <<<<<<< HEAD
 // app.use((req, res, next) => {
-//   res.setHeader("Content-Type", "application/json");
+//   //res.setHeader("Content-Type", "application/json");
 //   res.header("Access-Control-Allow-Origin", "*")
 //   res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
 //   next()
 // })
->>>>>>> 937ceb134a79385f045677202d9fda27093e33c2
+// =======
+// // app.use((req, res, next) => {
+// //   res.setHeader("Content-Type", "application/json");
+// //   res.header("Access-Control-Allow-Origin", "*")
+// //   res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
+// //   next()
+// // })
+// >>>>>>> 937ceb134a79385f045677202d9fda27093e33c2
 
 app.use('/', indexRouter);
 app.use('/', usersRouter);
 
-app.use('/chats', chatroom);
+app.use('/', chatroom);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
