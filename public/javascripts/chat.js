@@ -38,11 +38,12 @@ socket.on('code-message', message => {
 
 
 (function () {
-    $('#runButton').click(() => {
+    $('#js').on("change", (e) => {
+        e.preventDefault()
         let textarea = $('#js')
         let message = textarea.val()
-        socket.emit('send-code', message)
         textarea.html("")
+        socket.emit('send-code', message)
     })
 })
 
