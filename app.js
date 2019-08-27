@@ -35,12 +35,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+<<<<<<< HEAD
 app.use((req, res, next) => {
   //res.setHeader("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
+=======
+// app.use((req, res, next) => {
+//   res.setHeader("Content-Type", "application/json");
+//   res.header("Access-Control-Allow-Origin", "*")
+//   res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept")
+//   next()
+// })
+>>>>>>> 937ceb134a79385f045677202d9fda27093e33c2
 
 app.use('/', indexRouter);
 app.use('/', usersRouter);

@@ -1,4 +1,6 @@
+
 var socket = io();
+const code = document.getElementById('js')
 var messages = document.getElementById("messages");
 
 (function () {
@@ -30,15 +32,21 @@ var messages = document.getElementById("messages");
 
 
 
-(function () {
-    $('#runButton').click(() => {
-        socket.emit("message", $('#output').val())
-    })
-    socket.on('received', data => {
-        console.log(data)
+socket.on('code-message', message => {
+    code.append(message)
+});
 
+
+(function () {
+    $('#js').on("change", (e) => {
+        e.preventDefault()
+        let textarea = $('#js')
+        let message = textarea.val()
+        textarea.html("")
+        socket.emit('send-code', message)
     })
 })
+
 
 
     // fetching initial chat messages from the database
@@ -82,4 +90,3 @@ messageInput.addEventListener("keyup", () => {
 socket.on("notifyStopTyping", () => {
     typing.innerText = '';
 });
-
