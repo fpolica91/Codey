@@ -9,7 +9,9 @@ function socket(io) {
             socket.broadcast.emit("received", {
                 message: msg
             })
+
             Room.create({
+                sender: "Anonymous",
                 name: "Room Name",
                 message: msg
             }).then(data => console.log(data))

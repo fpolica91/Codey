@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser')
 const hbs = require('hbs');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -30,6 +30,7 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

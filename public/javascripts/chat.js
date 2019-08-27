@@ -51,7 +51,7 @@ socket.on('code-message', message => {
 
     // fetching initial chat messages from the database
     (function () {
-        fetch("/chats")
+        fetch("/getmessage")
             .then(data => {
                 return data.json();
             })
