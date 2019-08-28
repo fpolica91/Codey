@@ -6,17 +6,22 @@ const Room = require('../models/Room')
 
 
 
+
 router.get('/chats', (req, res, next) => {
     res.render('Chat/chatroom')
 
 })
 
-router.route('/getmessage').get((req, res, next) => {
-    let data = Room.find({ message: "Anonymous" });
-    Room.find({}).then(chat => {
-        res.json(chat);
-    });
+
+// THIS API RETRIEVES ALL THE MESSAGES FROM SERVER -> TEST WITH POSTMAN
+router.get('/', (req, res, next) => {
+    Room.find({})
+        .then(chat => {
+            console.log(chat)
+            res.json(chat)
+        })
 })
+
 
 
 module.exports = router;
