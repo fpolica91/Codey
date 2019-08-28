@@ -8,16 +8,17 @@ const userSchema = new Schema({
         minlength: 4,
         unique: true
     },
-    password: {
-        type: String,
-        minlength: 5
-    },
     email: {
         type: String,
-
+        required: true
     },
-    is_active: {type: Boolean, default: false}
-}) 
+    password: {
+        type: String,
+        minlength: 5,
+        required: true
+    },
+    is_active: { type: Boolean, default: false }
+})
 
 
 const User = mongoose.model('User', userSchema);
