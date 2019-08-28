@@ -5,26 +5,36 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport')
 
 /* GET users listing. */
-router.get('/signup', function(req, res, next) {
+router.get('/signup', (req, res, next) => {
   res.render('userviews/signup');
 });
 
-router.post('/signup', function(req, res, next){
+router.post('/signup', (req, res, next) => {
 
   let theUsername = req.body.username;
   let thePassword = req.body.password;
+  let theEmail = req.body.email;
 
-  if( !theUsername || !thePassword){
+  if( theUsername === "" || thePassword === ""){
     req.flash('error', 'please provide username and password it seems you have forgotten one or both')
-    res.render('/signup')
+    res.redirect('/signup')
   }
+
+  // User.findOne({ theUsername })
+  // .then(user => {
+  //   if(user !== null){
+  //     res.render('/signup', {message: "The username already exists"})
+  //     return;
+  //   }
+  // })
 
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(thePassword, salt);
 
   User.create({
     username: theUsername,
-    password: hashedPassword
+    password: hashedPassword,
+    email: theEmail
   })
   .then(() => {
     res.redirect('/')
@@ -34,7 +44,22 @@ next(err)
   })
 })
 
-router.get('/login', function(req, res, next){
+router.get('/login', (req, res, next) => {
   res.render('userviews/login')
 })
+
+
+router.post('/login', passport.authenticate('local', {
+successRedirect: "/",
+failureRedirect: '/login',
+failureFlash: true,
+passReqToCallback: true
+}))
+
+
+router.post('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+})
+
 module.exports = router;

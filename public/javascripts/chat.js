@@ -1,3 +1,5 @@
+let theUser = $('.theUser').html();
+// console.log(theUser);
 
 var socket = io();
 const code = document.getElementById('js')
@@ -11,7 +13,7 @@ var messages = document.getElementById("messages");
 
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
-        messages.appendChild(span).append("by " + "Anonymous" + ": " + "just now");
+        messages.appendChild(span).append("by " + `${theUser}` + ": " + "just now");
 
         $("#message").val("");
 
