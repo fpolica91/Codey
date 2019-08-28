@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-//const hbs = require('hbs');
 const bodyParser = require('body-parser')
 const hbs = require('hbs');
 var indexRouter = require('./routes/index');
@@ -18,6 +17,7 @@ const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const User = require('./models/User');
+const CodeAPI = require('./routes/APIS/codeAPI')
 
 mongoose.Promise = Promise;
 mongoose
@@ -60,29 +60,29 @@ app.use(session({
 
 
 //Middleware configuration for passport use
-passport.serializeUser((user, cb)=>{
+passport.serializeUser((user, cb) => {
   cb(null, user._id);
 });
 
 passport.deserializeUser((id, cb) => {
-  User.findById(id, (err, user)=>{
-    if(err){ return cb(err)}
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err) }
     cb(null, user);
   });
 });
 
 app.use(flash());
 
-passport.use(new LocalStrategy((username, password, next) =>{
-  User.findOne({ username }, (err, user)=>{
-    if(err){
+passport.use(new LocalStrategy((username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
       return next(err);
     }
-    if(!user){
-      return next(null, false, {message: "Incorrect username"});
+    if (!user) {
+      return next(null, false, { message: "Incorrect username" });
     }
-    if(!bcrypt.compareSync(password, user.password)){
-      return next(null, false, {message: "Incorrect password"});
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
     }
 
 
@@ -107,6 +107,7 @@ app.use('/', indexRouter);
 app.use('/', usersRouter);
 app.use('/', friendRouter);
 app.use('/', chatroom);
+app.use('/', CodeAPI)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,9 +1,8 @@
-let theUser = $('.theUser').html();
-
 
 var socket = io();
-const code = document.getElementById('js')
+// const code = document.getElementById('js')
 var messages = document.getElementById("messages");
+let theUser = $('.theUser').html();
 
 (function () {
     $("form").submit(function (e) {
@@ -33,41 +32,48 @@ var messages = document.getElementById("messages");
 })();
 
 
-
 socket.on('code-message', message => {
-    code.append(message)
+    code.value = message
 });
 
 
+
 (function () {
-    $('#js').on("change", (e) => {
-        e.preventDefault()
+    $('#js').change(() => {
         let textarea = $('#js')
         let message = textarea.val()
-        textarea.html("")
-        socket.emit('send-code', message)
+        // textarea.html("")
+        // socket.emit('send-code', message)
+        axios.get('/code')
+            .then(response => {
+                message = response.data.code
+            })
+        socket.emit("send-code", message)
+
+
+
     })
 })
 
 
 
-// fetching initial chat messages from the database
-// (function () {
-//     fetch("/chats")
-//         .then(data => {
-//             return data.json();
-//         })
-//         .then(json => {
-//             json.map(data => {
-//                 let li = document.createElement("li");
-//                 let span = document.createElement("span");
-//                 messages.appendChild(li).append(data.message);
-//                 messages
-//                     .appendChild(span)
-//                     .append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
-//             });
-//         });
-// })
+    // fetching initial chat messages from the database
+    (function () {
+        fetch("/chats")
+            .then(data => {
+                return data.json();
+            })
+            .then(json => {
+                json.map(data => {
+                    let li = document.createElement("li");
+                    let span = document.createElement("span");
+                    messages.appendChild(li).append(data.message);
+                    messages
+                        .appendChild(span)
+                        .append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
+                });
+            });
+    })
 // (function () {
 //     fetch('/blah')
 //         .then(data => {
