@@ -8,7 +8,7 @@ const Room = require('../models/Room')
 
 
 router.get('/chats', (req, res, next) => {
-    res.render('Chat/chatroom')
+    res.render('Chat/chatroom', {layout: false})
 
 })
 

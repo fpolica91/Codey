@@ -22,18 +22,19 @@
 
 {{/if}}
 
-<nav>
+<nav class="mainNav">
   {{#if currentUser}}
 <span><h3 class="theUser">{{currentUser.username}}</h3></span>
 <form action="/logout" method="POST">
 <button>Log out</button>
 </form>
+<a href="friendlist">Friends</a>
+<a href="searchUser">Add Friends</a>
   {{else}}
 
 <a href="Signup">Sign up</a>
 <a href="Login">Login</a>
   {{/if}}
-
 
 
 

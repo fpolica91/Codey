@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 const hbs = require('hbs');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const friendRouter = require('./routes/friends');
 const chatroom = require('./routes/chatroom')
 const socket = require('./socket/socket');
 const flash = require('connect-flash');
@@ -104,6 +105,7 @@ app.use((req, res, next) => {
 //ROUTES
 app.use('/', indexRouter);
 app.use('/', usersRouter);
+app.use('/', friendRouter);
 app.use('/', chatroom);
 
 // catch 404 and forward to error handler

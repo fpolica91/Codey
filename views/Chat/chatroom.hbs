@@ -1,10 +1,19 @@
-<title>Codey</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="stylesheets/chatroom.css">
-
-{{!-- {{#each chat}}
-{{this.message}}
-{{/each}} --}}
+  <script src="javascripts/jquery.min.js"></script>
+</head>
+<body>
+    
 <div class="window">
     <div class="top_menu">
         <div class="buttons">
@@ -29,7 +38,11 @@
             </button>
         </form>
     </div>
-
+    <div>
+{{#if currentUser}}
+<div class="theUser">{{currentUser.username}}</div>
+{{/if}}
+</div>
 </div>
 
 
@@ -56,3 +69,47 @@
 <script src="javascripts/socket.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
 <script src="javascripts/chat.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Codey</title>
+
+{{!-- {{#each chat}}
+{{this.message}}
+{{/each}} --}}

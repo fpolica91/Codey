@@ -17,6 +17,11 @@ const userSchema = new Schema({
         minlength: 5,
         required: true
     },
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "Friend"
+    }
+    ],
     is_active: { type: Boolean, default: false }
 })
 

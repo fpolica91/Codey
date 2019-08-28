@@ -1,5 +1,5 @@
 let theUser = $('.theUser').html();
-// console.log(theUser);
+
 
 var socket = io();
 const code = document.getElementById('js')
