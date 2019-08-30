@@ -1,12 +1,12 @@
-{{!-- <form action="/searchUser" method="POST">
+<form action="/searchUser" method="GET">
 <label>Username</label>
-<input type="text" name="userToAdd">
+<input type="text" name="userToSearch">
 <button>Search</button>
-</form> --}}
+</form>
 
 <form action="/AddNewFriend" method="POST">
 <label>Username</label>
-<input type="text" name="userToAdd">
+<input type="text" name="name">
 <button>Add Friend</button>
 </form>
 
@@ -14,7 +14,7 @@
 {{#if theUser}}
 
 {{#each theUser}}
-<li>{{this.username}}</li>
+<li>{{this.username}} ID: {{this._id}}</li>
 
 {{!-- <form action="/AddNewFriend" method="POST">
 <button class="addFriend" value="{{this._id}}">ADD FRIEND</button>
