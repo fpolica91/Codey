@@ -23,8 +23,6 @@ const userSchema = new Schema({
 },
     { timestamps: true }
 )
-
-
 userSchema.plugin(friends({ pathName: "friends" }))
 const User = mongoose.model('User', userSchema);
 
