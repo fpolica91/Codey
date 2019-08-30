@@ -15,7 +15,7 @@ router.post('/signup', (req, res, next) => {
   let thePassword = req.body.password;
   let theEmail = req.body.email;
 
-  if( theUsername === "" || thePassword === ""){
+  if (theUsername === "" || thePassword === "") {
     req.flash('error', 'please provide username and password it seems you have forgotten one or both')
     res.redirect('/signup')
   }
@@ -36,12 +36,12 @@ router.post('/signup', (req, res, next) => {
     password: hashedPassword,
     email: theEmail
   })
-  .then(() => {
-    res.redirect('/')
-  })
-  .catch((err) => {
-next(err)
-  })
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch((err) => {
+      next(err)
+    })
 })
 
 router.get('/login', (req, res, next) => {
@@ -50,11 +50,34 @@ router.get('/login', (req, res, next) => {
 
 
 router.post('/login', passport.authenticate('local', {
-successRedirect: "/",
-failureRedirect: '/login',
-failureFlash: true,
-passReqToCallback: true
+  successRedirect: "/",
+  failureRedirect: '/login',
+  failureFlash: true,
+  passReqToCallback: true
 }))
+
+// AUTH USING SLACK
+
+router.get("/auth/slack", passport.authenticate("slack"))
+
+router.get("/auth/slack/callback",
+  passport.authenticate("slack", {
+    successRedirect: "/chats",
+    failureRedirect: "/login"
+  })
+)
+
+//AUTH USING GITHUB
+router.get("/auth/github", passport.authenticate('github'))
+
+router.get("/auth/github/callback",
+  passport.authenticate('github', {
+    successRedirect: "/chats",
+    failureRedirect: "/"
+  })
+)
+
+
 
 
 router.post('/logout', (req, res, next) => {

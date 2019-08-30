@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: {
-        type: String, 
+        type: String,
         minlength: 4,
         unique: true
     },
@@ -17,14 +17,13 @@ const userSchema = new Schema({
         minlength: 5,
         required: true
     },
-    friends: [{
-        type: Schema.Types.ObjectId,
-        ref: "Friend"
-    }
-    ],
-    is_active: { type: Boolean, default: false }
-})
-userSchema.plugin(friends({pathName: "friends"}));
+    is_active: { type: Boolean, default: false },
+    githubID: String,
+    slackID: String,
+},
+    { timestamps: true }
+)
+
 
 const User = mongoose.model('User', userSchema);
 

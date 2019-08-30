@@ -1,6 +1,5 @@
 
 var socket = io();
-// const code = document.getElementById('js')
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
 
@@ -13,7 +12,7 @@ let theUser = $('.theUser').html();
         socket.emit("chat message", $("#message").val());
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
-        messages.appendChild(span).append("by " + `${theUser}` + ": " + "just now");
+        messages.appendChild(span).append("by " + theUser + ": " + "just now");
 
         $("#message").val("");
 
@@ -25,15 +24,35 @@ let theUser = $('.theUser').html();
         let liReceive = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
-        messages.appendChild(liReceive).append(data.message);
-        messages.appendChild(span).append("by " + `${theUser}` + ": " + "just now");
+        messages.appendChild(li).append(data.message);
+        messages.appendChild(span).append("by " + theUser + ": " + "just now");
 
     });
 })();
 
+(async function () {
+    await fetch("/history")
+        .then(data => {
+            return data.json();
+        })
+        .then(json => {
+            json.map(data => {
+                let li = document.createElement("li");
+                let span = document.createElement("span");
+                messages.appendChild(li).append(data.message);
+                messages
+                    .appendChild(span)
+                    .append("by " + theUser + ": " + formatTimeAgo(data.createdAt));
+            });
+        });
+})();
 
-socket.on('code-message', message => {
-    code.value = message
+
+
+
+
+socket.on('code-message', data => {
+    code.value = data
 });
 
 
@@ -41,45 +60,20 @@ socket.on('code-message', message => {
 (function () {
     $('#js').change(() => {
         let textarea = $('#js')
-        let message = textarea.val()
-        // textarea.html("")
+        let da = textarea.val()
+        textarea.html("")
         // socket.emit('send-code', message)
         axios.get('/code')
             .then(response => {
-                message = response.data.code
+                da = response.data.code
             })
-        socket.emit("send-code", message)
-
-
-
+        socket.emit("send-code", da)
     })
-})
+})();
 
 
 
-    // fetching initial chat messages from the database
-    (function () {
-        fetch("/chats")
-            .then(data => {
-                return data.json();
-            })
-            .then(json => {
-                json.map(data => {
-                    let liHisto = document.createElement("li");
-                    let span = document.createElement("span");
-                    messages.appendChild(liHisto).append(data.message);
-                    messages.appendChild(span).append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
-                });
-            });
-    })
-// (function () {
-//     fetch('/blah')
-//         .then(data => {
-//             data.map(thing => {
-//                 document.write(thing)
-//             })
-//         })
-// })
+// fetching initial chat messages from the database
 
 //is typing...
 

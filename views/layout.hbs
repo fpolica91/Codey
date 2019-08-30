@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
 <nav class="mainNav">
   {{#if currentUser}}
@@ -23,19 +24,47 @@
 <a href="friendlist">See All Friends</a>
 <a href="searchUser">Add Friends</a>
   {{else}}
-
-<a href="Signup">Sign up</a>
-<a href="Login">Login</a>
+=======
+  {{#if errorMessage}}
+  {{errorMessage}}
   {{/if}}
 
+  {{#if successMessage}}
+  {{successMessage}}
+
+  {{/if}}
+
+  <nav>
+    {{#if currentUser}}
+    <span>
+      <h3 class="theUser">{{currentUser.username}}</h3>
+    </span>
+    <form action="/logout" method="POST">
+      <button>Log out</button>
+    </form>
+    {{else}}
+
+    <a href="Signup">Sign up</a>
+    <a href="Login">Login</a>
+    <a href="/auth/slack">Login With Slack</a>
+    <a href="/auth/github"> Login with Github</a>
+>>>>>>> fb081472299fa042d54c120e1c2f641589f152dd
+
+    {{/if}}
 
 
 
 
+
+<<<<<<< HEAD
 </nav>
   {{#if errorMessage}}
 <div>{{errorMessage}}</div>
 {{/if}}
+=======
+
+  </nav>
+>>>>>>> fb081472299fa042d54c120e1c2f641589f152dd
 
 {{#if successMessage}}
 {{successMessage}}

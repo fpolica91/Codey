@@ -16,7 +16,7 @@ router.post('/code', (req, res, next) => {
     code.update({
         code: req.body.code
     }).then(response => {
-        res.json({ msg: "working" })
+        res.json({ message: "working" })
     })
         .catch(err => console.log(err))
 })
