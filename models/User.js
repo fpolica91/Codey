@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: {
-        type: String, 
+        type: String,
         minlength: 4,
         unique: true
     },
@@ -17,8 +17,12 @@ const userSchema = new Schema({
         minlength: 5,
         required: true
     },
-    is_active: { type: Boolean, default: false }
-})
+    is_active: { type: Boolean, default: false },
+    githubID: String,
+    slackID: String,
+},
+    { timestamps: true }
+)
 
 
 const User = mongoose.model('User', userSchema);

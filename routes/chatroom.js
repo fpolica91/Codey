@@ -12,15 +12,4 @@ router.get('/chats', (req, res, next) => {
 })
 
 
-// THIS API RETRIEVES ALL THE MESSAGES FROM SERVER -> TEST WITH POSTMAN
-// router.get('/jesus', (req, res, next) => {
-//     Room.find({})
-//         .then(chat => {
-//             console.log(chat)
-//             res.json(chat)
-//         })
-// })
-
-
-
 module.exports = router;

@@ -1,4 +1,3 @@
-var socket = io()
 const code = document.getElementById('js')
 
 

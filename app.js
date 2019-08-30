@@ -16,7 +16,11 @@ const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const User = require('./models/User');
-const CodeAPI = require('./routes/APIS/codeAPI')
+const codeAPI = require('./routes/APIS/codeAPI')
+const chatApi = require('./routes/APIS/chatAPI')
+require('./config/passportcongif')
+
+
 
 mongoose.Promise = Promise;
 mongoose
@@ -105,7 +109,8 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/', usersRouter);
 app.use('/', chatroom);
-app.use('/', CodeAPI)
+app.use('/', codeAPI)
+app.use('/', chatApi)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

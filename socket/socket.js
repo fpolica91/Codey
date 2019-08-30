@@ -6,14 +6,11 @@ const Code = require('../models/Code')
 function socket(io) {
     io.on('connection', (socket) => {
         console.log('A user connected')
-        socket.on('chat message', (msg) => {
-            socket.broadcast.emit("received", {
-                message: msg
-            })
-
+        socket.on('chat message', function (msg) {
+            socket.broadcast.emit("received", { message: msg });
             Room.create({
-                sender: "Anonymous",
-                name: "Room Name",
+                sender: "",
+                name: "",
                 message: msg
             }).then(data => console.log(data))
                 .catch(err => next(err))
@@ -26,13 +23,6 @@ function socket(io) {
             }).then(code => console.log(code))
                 .catch(err => next(err))
         })
-
-        // socket.on('message', (data) => {
-        //     socket.broadcast.emit('received', {
-        //         data
-        //     })
-        // })
-
         socket.on('disconnect', data => {
             console.log('user disconnected')
         })
