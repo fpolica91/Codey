@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-//SEARCH USERS
+// SEARCH USERS
 router.get('/searchUser', (req, res, next) => {
     // console.log("The user ID is " + req.user_.id)
     res.render('friendviews/searchUserForm');
@@ -23,8 +23,21 @@ router.get('/searchUser', (req, res, next) => {
 
 
 //SHOW FRIENDLIST
+
 router.get('/friendlist', (req, res, next) => {
     res.render('friendviews/friendList');
+    console.log("the user ID is " + req.user._id)
+    User.findById(req.user._id)
+        .then(theUser => {
+            User.getFriends(theUser, function (err, friendship) {
+                // console.log(friendship);
+                res.render('friendviews/friendList', { theUser, friendship });
+            })
+
+        })
+        .catch((err) => console.log("An err just happened", err))
+    // User.getFriends(req.user._id);
+
 })
 
 // router.post('/AddNewFriend', (req, res, next) => {
@@ -41,13 +54,13 @@ router.post('/AddNewFriend', (req, res, next) => {
     User.findOne({ username: req.body.name })
         .then(user => {
             console.log(user)
-            // if (!user.length) {
-            //     req.flash('error', 'There is no username with that name');
-            //     res.redirect('/searchUser');
-            // } else {
-            User.requestFriend(req.user._id, user._id);
-            res.render('friendviews/friendList');
-            // }
+            if (!user) {
+                req.flash('error', 'There is no username with that name');
+                res.redirect('/searchUser');
+            } else {
+                User.requestFriend(req.user._id, user._id);
+                res.render('friendviews/friendList');
+            }
         })
         .catch((err) => console.log("An error just happened ", err))
 })
