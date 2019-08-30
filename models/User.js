@@ -25,6 +25,7 @@ const userSchema = new Schema({
 )
 
 
+userSchema.plugin(friends({ pathName: "friends" }))
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
