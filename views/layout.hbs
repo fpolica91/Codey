@@ -13,14 +13,6 @@
 </head>
 
 <body>
-  {{#if errorMessage}}
-{{errorMessage}}
-{{/if}}
-
-{{#if successMessage}}
-{{successMessage}}
-
-{{/if}}
 
 <nav class="mainNav">
   {{#if currentUser}}
@@ -28,7 +20,7 @@
 <form action="/logout" method="POST">
 <button>Log out</button>
 </form>
-<a href="friendlist">Friends</a>
+<a href="friendlist">See All Friends</a>
 <a href="searchUser">Add Friends</a>
   {{else}}
 
@@ -41,7 +33,14 @@
 
 
 </nav>
+  {{#if errorMessage}}
+<div>{{errorMessage}}</div>
+{{/if}}
 
+{{#if successMessage}}
+{{successMessage}}
+
+{{/if}}
   {{{body}}}
 
 </body>

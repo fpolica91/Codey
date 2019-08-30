@@ -1,5 +1,31 @@
-<form action="/searchUser" method="POST">
+{{!-- <form action="/searchUser" method="POST">
 <label>Username</label>
-<input type="text" name="userToSearch">
+<input type="text" name="userToAdd">
 <button>Search</button>
+</form> --}}
+
+<form action="/AddNewFriend" method="POST">
+<label>Username</label>
+<input type="text" name="userToAdd">
+<button>Add Friend</button>
 </form>
+
+<ul>
+{{#if theUser}}
+
+{{#each theUser}}
+<li>{{this.username}}</li>
+
+{{!-- <form action="/AddNewFriend" method="POST">
+<button class="addFriend" value="{{this._id}}">ADD FRIEND</button>
+</form> --}}
+
+
+{{/each}}
+
+{{/if}}
+</ul>
+{{!-- {{#if errorMessage}}
+<div>{{errorMessage}}</div>
+{{/if}} --}}
+<a href="/">Go back</a>

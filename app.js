@@ -30,7 +30,7 @@ mongoose
   });
 
 var app = express()
-app.io = require("socket.io")()
+app.io = require("socket.io")();
 socket(app.io)
 
 // view engine setup

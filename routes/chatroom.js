@@ -4,10 +4,15 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose')
 const Room = require('../models/Room')
 
-
+const ensureLogin = require('connect-ensure-login');
 
 
 router.get('/chats', (req, res, next) => {
+
+    // if(!req.user){
+    //     res.redirect('/login');
+    // }
+
     res.render('Chat/chatroom', {layout: false})
 
 })

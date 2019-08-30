@@ -1,7 +1,5 @@
-var socket = io()
+//var socket = io()
 const code = document.getElementById('js')
-
-
 
 
 code.onkeyup = () => {

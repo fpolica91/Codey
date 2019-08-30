@@ -18,7 +18,7 @@ function socket(io) {
             }).then(data => console.log(data))
                 .catch(err => next(err))
         })
-
+    
         socket.on('send-code', (code) => {
             socket.broadcast.emit('code-message', code)
             Code.create({
@@ -35,6 +35,7 @@ function socket(io) {
 
         socket.on('disconnect', data => {
             console.log('user disconnected')
+            socket.removeAllListeners();
         })
     })
 }

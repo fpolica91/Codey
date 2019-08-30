@@ -5,11 +5,12 @@ var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
 
 (function () {
-    $("form").submit(function (e) {
+    $("#sendForm").submit(function (e) {
+         // prevents page reloading
+        e.preventDefault();
         let li = document.createElement("li");
-        e.preventDefault(); // prevents page reloading
+       
         socket.emit("chat message", $("#message").val());
-
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + `${theUser}` + ": " + "just now");
@@ -17,16 +18,15 @@ let theUser = $('.theUser').html();
         $("#message").val("");
 
         return false;
-    });
-
-
+    })
 
     socket.on("received", data => {
-        let li = document.createElement("li");
+        console.log(data);
+        let liReceive = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
-        messages.appendChild(li).append(data.message);
-        messages.appendChild(span).append("by " + "anonymous" + ": " + "just now");
+        messages.appendChild(liReceive).append(data.message);
+        messages.appendChild(span).append("by " + `${theUser}` + ": " + "just now");
 
     });
 })();
@@ -65,12 +65,10 @@ socket.on('code-message', message => {
             })
             .then(json => {
                 json.map(data => {
-                    let li = document.createElement("li");
+                    let liHisto = document.createElement("li");
                     let span = document.createElement("span");
-                    messages.appendChild(li).append(data.message);
-                    messages
-                        .appendChild(span)
-                        .append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
+                    messages.appendChild(liHisto).append(data.message);
+                    messages.appendChild(span).append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
                 });
             });
     })
