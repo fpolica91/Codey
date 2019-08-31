@@ -19,6 +19,7 @@ const session = require('express-session');
 const User = require('./models/User');
 const codeAPI = require('./routes/APIS/codeAPI')
 const chatApi = require('./routes/APIS/chatAPI')
+const runkit = require('./routes/runkit')
 require('./config/passportcongif')
 
 
@@ -113,6 +114,8 @@ app.use('/', friendRouter);
 app.use('/', chatroom);
 app.use('/', codeAPI)
 app.use('/', chatApi)
+app.use('/', runkit)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
