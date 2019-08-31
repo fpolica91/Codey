@@ -3,22 +3,22 @@ const router = express.Router();
 const User = require('../models/User');
 
 //SEARCH USERS
-router.get('/searchUser', (req, res, next) =>{
+router.get('/searchUser', (req, res, next) => {
     console.log(req.query.userToSearch);
-    if(req.query.userToSearch === undefined){
+    if (req.query.userToSearch === undefined) {
         res.render('friendviews/searchUserForm');
-    }else{
-    User.find({username: { $eq: req.query.userToSearch}})
-    .then(theUser => {
-        if(theUser.length === 0){
-            req.flash('error', 'There is no username with that name');
-            res.redirect('/searchUser');
-        }else{
-            res.render('friendviews/searchUserForm', {theUser} );
-        }
-    })
-    .catch((err) => console.log("An error just happened ", err))
-}
+    } else {
+        User.find({ username: { $eq: req.query.userToSearch } })
+            .then(theUser => {
+                if (theUser.length === 0) {
+                    req.flash('error', 'There is no username with that name');
+                    res.redirect('/searchUser');
+                } else {
+                    res.render('friendviews/searchUserForm', { theUser });
+                }
+            })
+            .catch((err) => console.log("An error just happened ", err))
+    }
 })
 
 //SHOW FRIENDLIST
@@ -26,22 +26,15 @@ router.get('/searchUser', (req, res, next) =>{
 router.get('/friendlist', (req, res, next) => {
     console.log("the user ID is " + req.user._id)
     User.findById(req.user._id)
-    .then(theUser => {
-       User.getFriends(theUser, function(err, friendship){
-          // console.log(friendship);
-        res.render('friendviews/friendList', {theUser, friendship});
-       })
-       
-    })
-    .catch((err)=> console.log("An err just happened", err))
-       // User.getFriends(req.user._id);
-   
-})
+        .then(theUser => {
+            User.getFriends(theUser, function (err, friendship) {
+                // console.log(friendship);
+                res.render('friendviews/friendList', { theUser, friendship });
+            })
 
-// router.post('/AddNewFriend', (req, res, next) => {
-//     console.log(req.body);
-//    // User.requestFriend(req.user._id, )
-// })
+        })
+        .catch((err) => console.log("An err just happened", err))
+})
 
 
 //VERSION 1
@@ -51,28 +44,35 @@ router.post('/AddNewFriend', (req, res, next) => {
             console.log(user)
             User.requestFriend(req.user._id, user._id);
             res.render('friendviews/friendList');
-            // }
         })
         .catch((err) => console.log("An error just happened ", err))
 })
 
-// //VERSION 2
-// router.post('/AddNewFriend', (req, res, next) => {
-//     let yourUser = req.user._id;
-//     console.log("This is " + req.query.userToAdd);
-//     // User.findById(req.query.userToAdd)
-//     // .then(theUser => {
-//     //     console.log(theUser);
-//         // if(theUser.length === 0){
-//         //     req.flash('error', 'There is no username with that name');
-//         //     res.redirect('/searchUser');
-//         // }else{
-//         //     User.requestFriend(yourUser, theUser._id);
-//         //     res.render('friendviews/friendList');
-//         // }
-//     // })
-//     // .catch((err) => console.log("An error just happened ", err))
-//     })
+
+
+router.post("/delete/:id", (req, res, next) => {
+    User.findById(req.params.id)
+        .then(user => {
+            User.removeFriend(req.user, user)
+            res.redirect("/friendlist")
+        })
+})
+
+
+
+router.post('/acceptRequest/:id', (req, res, next) => {
+    User.findById(req.params.id)
+        .then(user => {
+            User.requestFriend(req.user._id, user._id)
+            res.redirect('/friendlist')
+        })
+
+})
+
+
+
+
+
 
 
 module.exports = router;

@@ -3,10 +3,26 @@
 <h1>All your Friends</h1>
 
 {{#each friendship}}
-<li>Name: {{this.friend.username}} | |  Status: {{this.status}}</li>
-<form>
-    
-</form>
+<li>Name: {{this.friend.username}} | | Status: {{this.status}}
+  {{#if_eq this.status "pending"}}
+  <form action="/acceptRequest/{{this._id}}" method="POST">
+    <button>accept</button>
+  </form>
+  {{!-- <form action="/declineRequest/{{this._id}}" method="POST">
+    <button>Decline</button>
+  </form> --}}
+  <form action='/delete/{{this._id}}' method="POST">
+    <button>Decline</button>
+  </form>
+  {{/if_eq}}
+
+  <form action='/delete/{{this._id}}' method="POST">
+    <button>Remove Friend</button>
+  </form>
+</li>
+{{!-- <form>
+
+</form> --}}
 {{/each}}
 
 
@@ -14,14 +30,14 @@
 
 
 
-<script >
-Handlebars.registerHelper('if_eq', function(a, b, opts){
-if(a === b){
-  return opts.fn(this);
-}else{
-  return opts.inverse(this);
-}
-});
+<script>
+  Handlebars.registerHelper('if_eq', function (a, b, opts) {
+    if (a === b) {
+      return opts.fn(this);
+    } else {
+      return opts.inverse(this);
+    }
+  });
 </script>
- <script type='text/javascript' src='js/handlebars-v4.0.5.js'></script>
-    <script type='text/javascript' src='js/name-table.js'></script>
+<script type='text/javascript' src='js/handlebars-v4.0.5.js'></script>
+<script type='text/javascript' src='js/name-table.js'></script>
