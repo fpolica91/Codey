@@ -20,6 +20,7 @@ const User = require('./models/User');
 const codeAPI = require('./routes/APIS/codeAPI')
 const chatApi = require('./routes/APIS/chatAPI')
 const runkit = require('./routes/runkit')
+const friendsApi = require('./routes/APIS/friendsApi')
 require('./config/passportcongif')
 
 
@@ -114,7 +115,7 @@ app.use('/', friendRouter);
 app.use('/', chatroom);
 app.use('/', codeAPI)
 app.use('/', chatApi)
-app.use('/', runkit)
+app.use('/', friendsApi)
 
 
 // catch 404 and forward to error handler

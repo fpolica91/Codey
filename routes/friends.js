@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const bodyParser = require("body-parser");
 
 //SEARCH USERS
 router.get('/searchUser', (req, res, next) => {
@@ -24,11 +25,9 @@ router.get('/searchUser', (req, res, next) => {
 //SHOW FRIENDLIST
 
 router.get('/friendlist', (req, res, next) => {
-    console.log("the user ID is " + req.user._id)
     User.findById(req.user._id)
         .then(theUser => {
             User.getFriends(theUser, function (err, friendship) {
-                // console.log(friendship);
                 res.render('friendviews/friendList', { theUser, friendship });
             })
 
@@ -47,6 +46,10 @@ router.post('/AddNewFriend', (req, res, next) => {
         })
         .catch((err) => console.log("An error just happened ", err))
 })
+
+
+
+
 
 
 

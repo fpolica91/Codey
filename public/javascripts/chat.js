@@ -5,10 +5,10 @@ let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
-         // prevents page reloading
+        // prevents page reloading
         e.preventDefault();
         let li = document.createElement("li");
-       
+
         socket.emit("chat message", $("#message").val());
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
