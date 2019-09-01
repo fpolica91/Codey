@@ -50,12 +50,21 @@ router.post('/AddNewFriend', (req, res, next) => {
         .then(user => {
             console.log(user)
             User.requestFriend(req.user._id, user._id);
-            res.render('friendviews/friendList');
+            res.redirect('/friendList');
             // }
         })
         .catch((err) => console.log("An error just happened ", err))
 })
 
+router.post('/acceptRequest/:id', (req, res, next) => {
+    User.findById(req.params.id)
+        .then(user => {
+            console.log(user._id)
+            User.requestFriend(req.user._id, user._id);
+            res.redirect('/friendlist')
+        })
+        .catch(err => console.log("An error just happened ", err))
+})
 // //VERSION 2
 // router.post('/AddNewFriend', (req, res, next) => {
 //     let yourUser = req.user._id;

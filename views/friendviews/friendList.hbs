@@ -1,27 +1,42 @@
-{{#if currentUser}}
 
+{{#if currentUser}}
+<button>Requested</button>
+<button>Pending</button>
+<button>Friends</button>
 <h1>All your Friends</h1>
 
+
+{{#if friendship}}
 {{#each friendship}}
+
+
 <li>Name: {{this.friend.username}} | |  Status: {{this.status}}</li>
-<form>
-    
-</form>
+
+{{#if_eq this.status "pending"}}
+<form action="/acceptRequest/{{this._id}}" method="POST">
+    <button>accept</button>
+  </form>
+  <form action='/delete/{{this._id}}' method="POST">
+    <button>Decline</button>
+  </form>
+{{/if_eq}}
+
+
+{{#if_eq this.status "accepted"}}
+ <form action='/delete/{{this._id}}' method="POST">
+    <button>Remove Friend</button>
+  </form>
+{{/if_eq}}
+
 {{/each}}
 
+{{else}}
+<div>You have no friends</div>
+{{/if}}
 
 {{/if}}
 
 
 
-<script >
-Handlebars.registerHelper('if_eq', function(a, b, opts){
-if(a === b){
-  return opts.fn(this);
-}else{
-  return opts.inverse(this);
-}
-});
-</script>
  <script type='text/javascript' src='js/handlebars-v4.0.5.js'></script>
     <script type='text/javascript' src='js/name-table.js'></script>
