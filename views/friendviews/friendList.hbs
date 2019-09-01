@@ -1,4 +1,21 @@
+{{#if currentUser}}
 
+<button id="pendingFBtn">See Pending Friends</button>
+<button id="requestedFBtn">See Requested Friends</button>
+<button id="friendsFBtn">See All Friends</button>
+
+<div id="friendTitle"></div>
+
+<div id="listFriend"></div>
+{{/if}}
+
+
+
+
+
+
+
+{{!-- 
 {{#if currentUser}}
 <button>Requested</button>
 <button>Pending</button>
@@ -8,35 +25,36 @@
 
 {{#if friendship}}
 {{#each friendship}}
-
-
-<li>Name: {{this.friend.username}} | |  Status: {{this.status}}</li>
-
-{{#if_eq this.status "pending"}}
-<form action="/acceptRequest/{{this._id}}" method="POST">
+<li>Name: {{this.friend.username}} | | Status: {{this.status}}
+  {{#if_eq this.status "pending"}}
+  <form action="/acceptRequest/{{this._id}}" method="POST">
     <button>accept</button>
   </form>
-  <form action='/delete/{{this._id}}' method="POST">
+  {{!-- <form action="/declineRequest/{{this._id}}" method="POST">
+    <button>Decline</button>
+  </form> --}}
+  {{!-- <form action='/delete/{{this._id}}' method="POST">
     <button>Decline</button>
   </form>
-{{/if_eq}}
+  {{/if_eq}}
 
-
-{{#if_eq this.status "accepted"}}
- <form action='/delete/{{this._id}}' method="POST">
+  <form action='/delete/{{this._id}}' method="POST">
     <button>Remove Friend</button>
   </form>
-{{/if_eq}}
+</li> --}}
+{{!-- <form>
 
-{{/each}}
+</form> --}}
+{{!-- {{/each}}
 
 {{else}}
 <div>You have no friends</div>
 {{/if}}
 
-{{/if}}
-
+{{/if}} --}} 
 
 
  <script type='text/javascript' src='js/handlebars-v4.0.5.js'></script>
     <script type='text/javascript' src='js/name-table.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+   <script src="javascripts/friend.js"></script>

@@ -19,6 +19,8 @@ const session = require('express-session');
 const User = require('./models/User');
 const codeAPI = require('./routes/APIS/codeAPI')
 const chatApi = require('./routes/APIS/chatAPI')
+const runkit = require('./routes/runkit')
+const friendsApi = require('./routes/APIS/friendsApi')
 require('./config/passportcongif')
 
 
@@ -113,6 +115,8 @@ app.use('/', friendRouter);
 app.use('/', chatroom);
 app.use('/', codeAPI)
 app.use('/', chatApi)
+app.use('/', friendsApi)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -133,12 +137,13 @@ app.use(function (err, req, res, next) {
 });
 
 
-hbs.registerHelper('if_eq', function(a, b, opts){
-  if(a === b){
+hbs.registerHelper('if_eq', function (a, b, opts) {
+  if (a === b) {
     return opts.fn(this);
-  }else{
+  } else {
     return opts.inverse(this);
   }
-  });
+});
+
 
 module.exports = app;
