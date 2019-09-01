@@ -20,14 +20,6 @@ router.post('/signup', (req, res, next) => {
     res.redirect('/signup')
   }
 
-  // User.findOne({ theUsername })
-  // .then(user => {
-  //   if(user !== null){
-  //     res.render('/signup', {message: "The username already exists"})
-  //     return;
-  //   }
-  // })
-
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(thePassword, salt);
 
@@ -76,6 +68,16 @@ router.get("/auth/github/callback",
     failureRedirect: "/"
   })
 )
+
+
+router.get('/lobby/:id', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => {
+      User.getFriends(user, function (err, friendship) {
+        res.render('userviews/lobby', { user, friendship })
+      })
+    })
+})
 
 
 

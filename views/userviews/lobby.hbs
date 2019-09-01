@@ -1,0 +1,33 @@
+{{#if user }}
+
+
+<p>Welcome, {{user.username}}</p>
+
+
+
+
+
+
+<h4>Create a new Chatroom</h4>
+<label for="chatroom">Enter your Chatroom details here:</label>
+<form action="/create/chat" method="POST">
+    <label for="name">Enter Chatroom Name</label>
+    <input type="text" name="name">
+    <label for="topic">Specify Topic</label>
+    <input type="text" name="topic">
+    <br>
+    <label for="friends"> add friends</label>
+    {{#each friendship}}
+    {{#if_eq this.status "accepted"}}
+    <input type="checkbox" value="{{this.friend._id}}" name="friends"> <label> {{this.friend.username}}</label>
+    {{/if_eq}}
+    {{/each}}
+    <button type="submit">Submit</button>
+</form>
+
+{{/if}}
+
+{{#each userLobbies}}
+<p> your lobbies: {{this.name}} <a href="/chats/{{this._id}}"> Enter Lobby</a> </p>
+
+{{/each}}

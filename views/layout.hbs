@@ -10,41 +10,57 @@
   <script src="javascripts/jquery.min.js"></script>
 
 
+
 </head>
 
 <body>
 
   {{#if errorMessage}}
-<div>{{errorMessage}}</div>
-{{/if}}
-
- 
-
-{{#if successMessage}}
-{{successMessage}}
-{{/if}}
+  <div>{{errorMessage}}</div>
+  {{/if}}
 
 
-<nav class="mainNav">
-  {{#if currentUser}}
-<span><h3 class="theUser">{{currentUser.username}}</h3></span>
-<form action="/logout" method="POST">
-<button>Log out</button>
-</form>
-<a href="friendlist">See All Friends</a>
-<a href="searchUser">Add Friends</a>
 
-  {{else}}
+  {{#if successMessage}}
+  {{successMessage}}
+  {{/if}}
+
+
+  <nav class="mainNav">
+    {{#if currentUser}}
+    <span>
+      <h3 class="theUser">{{currentUser.username}}</h3>
+    </span>
+    <form action="/logout" method="POST">
+      <button>Log out</button>
+    </form>
+    <a href="/friendlist">See All Friends</a>
+    <a href="/searchUser">Add Friends</a>
+    <a href="/lobby/{{currentUser._id}}">User Lobby</a>
+    <a href="/allchats"> Your Lobbies</a>
+
+    {{else}}
 
     <a href="Signup">Sign up</a>
     <a href="Login">Login</a>
     <a href="/auth/slack">Login With Slack</a>
     <a href="/auth/github"> Login with Github</a>
 
+
     {{/if}}
 
-  {{{body}}}
+    {{{body}}}
+
+    <script src="javascripts/compiler.js"></script>
+    <script src="javascripts/socket.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="javascripts/chat.js"></script>
+    <script src="javascripts/code.js"></script>
 
 </body>
+
+
+
 
 </html>
