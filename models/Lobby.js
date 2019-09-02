@@ -10,6 +10,7 @@ const lobbySchema = new Schema({
     topic: String,
     messages: [{ type: Schema.Types.ObjectId, ref: "Room" }],
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    code: [{ type: Schema.Types.ObjectId, ref: "Code" }],
     creator: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 
