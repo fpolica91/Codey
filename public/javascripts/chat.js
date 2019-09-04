@@ -1,17 +1,20 @@
-
 var socket = io();
+let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
-let theUser = $('.theUser').html();
+let theUser = $('.theUser').val();
+
+
+
 
 (function () {
     $("#sendForm").submit(function (e) {
         // prevents page reloading
         e.preventDefault();
         let li = document.createElement("li");
-        socket.emit("chat message", $("#message").val());
+        socket.emit("chat message", $("#message").val(), id);
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
-        messages.appendChild(span).append("by " + theUser + ": " + "just now");
+        messages.appendChild(span).append("by " + id + ": " + "just now");
 
         $("#message").val("");
 

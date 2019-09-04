@@ -42,15 +42,14 @@ const User = require('../models/User')
 function socket(io) {
     let newCode;
     io.on('connection', (socket) => {
-        console.log('user connected')
-        socket.on('chat message', function (msg) {
+        console.log()
+        socket.on('chat message', function (msg, id) {
             socket.broadcast.emit("received", { message: msg });
             let chat = new Room({
                 message: msg
             })
             chat.save()
-            Lobby.findByIdAndUpdate("5d6d868d22fae605d0531dad", {
-                // Lobby.findByIdAndUpdate(helper.getId(), {
+            Lobby.findByIdAndUpdate(id, {
                 $push: {
                     messages: chat,
                     code: newCode
@@ -64,7 +63,6 @@ function socket(io) {
             newCode = new Code({
                 code: code
             })
-
             newCode.save()
         })
     })
