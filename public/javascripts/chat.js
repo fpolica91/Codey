@@ -8,7 +8,6 @@ let theUser = $('.theUser').html();
         // prevents page reloading
         e.preventDefault();
         let li = document.createElement("li");
-
         socket.emit("chat message", $("#message").val());
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
@@ -20,13 +19,11 @@ let theUser = $('.theUser').html();
     })
 
     socket.on("received", data => {
-        console.log(data);
-        let liReceive = document.createElement("li");
+        let li = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
         messages.appendChild(li).append(data.message);
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
-
     });
 })();
 
