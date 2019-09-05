@@ -82,13 +82,23 @@ function socket(io) {
       //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
 
-        socket.on('chat message', function (msg) {
+        socket.on('chat message', function (msg, theUser) {
+            console.log("THE USER COMES AFTER THIS")
+            console.log(theUser);
             socket.join(`${realUrl}`)
-            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg });
+            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg});
             let chat = new Room({
-                message: msg
+                message: msg, 
+                sender: theUser  
+            }
+               
+        )
+            chat.save(function(err) {
+                if (err){
+                    return handleError(err)
+                }
             })
-            chat.save()
+
             Lobby.findByIdAndUpdate(`${realUrl}`, {
                 $push: {
                     messages: chat,

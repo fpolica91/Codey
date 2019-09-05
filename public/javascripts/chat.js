@@ -1,18 +1,15 @@
+
 var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
-let theUser = $('.theUser').val();
-
-
-
-
+let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
         socket.emit("connection", id);
         e.preventDefault();
         let li = document.createElement("li");
-        socket.emit("chat message", $("#message").val(), id);
+        socket.emit("chat message", $("#message").val(), theUser);
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
@@ -28,7 +25,7 @@ let theUser = $('.theUser').val();
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
         messages.appendChild(li).append(data.message);
-        messages.appendChild(span).append("by " + theUser + ": " + "just now");
+        messages.appendChild(span).append("by " + data.sender + ": " + "just now");
     });
 })();
 
@@ -38,15 +35,18 @@ let theUser = $('.theUser').val();
             return data.json();
         })
         .then(json => {
+            console.log(json[0]);
             json.map(data => {
+                console.log(data);
                 let li = document.createElement("li");
                 let span = document.createElement("span");
                 messages.appendChild(li).append(data.message);
                 messages
                     .appendChild(span)
-                    .append("by " + theUser + ": " + formatTimeAgo(data.createdAt));
-            });
-        });
+                    .append("by " + data.sender + ": " + formatTime(new Date(data.createdAt)));
+                    // .append("by " + data.sender + ": " + new Date(data.createdAt).getHours() + ":"  + new Date(data.createdAt).getMinutes());
+            })
+        }).catch(err => console.log("An error happened fetching ", err));
 })();
 
 
@@ -100,3 +100,24 @@ messageInput.addEventListener("keyup", () => {
 socket.on("notifyStopTyping", () => {
     typing.innerText = '';
 });
+
+
+//FORMAT TIME
+function formatTime(dateStr) {
+    let monthArray = ["Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+    let theMonth = dateStr.getMonth();
+    theMonth = monthArray[theMonth -1]
+    let theDay = dateStr.getDate();
+    let theHours = dateStr.getHours();
+    let theMinutes = dateStr.getMinutes();
+    console.log(typeof theMonth);
+    if(theHours > 12){
+        theHours -= 12;
+        return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " PM";
+    }else if(theHours === 0){
+        theHours = 12
+        return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
+    }
+    return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
+  
+};

@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const roomSchema = new Schema(
   {
     message: String,
+    sender: String
   },
-
   {
     timestamps: true
   }

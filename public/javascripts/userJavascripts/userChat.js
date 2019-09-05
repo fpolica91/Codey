@@ -5,6 +5,7 @@ let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
+        console.log("The user is " + theUser);
         e.preventDefault();
         let li = document.createElement("li");
 
