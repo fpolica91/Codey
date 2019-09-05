@@ -9,21 +9,21 @@ let theUser = $('.theUser').val();
 
 (function () {
     $("#sendForm").submit(function (e) {
-        socket.emit("connection")
-        socket.emit("secret", id)
+        socket.emit("connection", id);
         e.preventDefault();
         let li = document.createElement("li");
         socket.emit("chat message", $("#message").val(), id);
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
-        messages.appendChild(span).append("by " + id + ": " + "just now");
+        messages.appendChild(span).append("by " + theUser + ": " + "just now");
 
         $("#message").val("");
 
         return false;
     })
 
-    socket.on("received", data => {
+
+    socket.on("received", (data) => {
         let li = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");

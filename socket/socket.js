@@ -74,10 +74,13 @@ const User = require('../models/User')
 
 function socket(io) {
     let newCode;
-    io.on('connection', (socket) => {
+
+
+
+    io.on('connection', function (socket, id) {
         socket.on('chat message', function (msg, id) {
             socket.join(id)
-            socket.broadcast.to(id).emit("received", { message: msg });
+            socket.broadcast.to(id).emit("received", { message: msg, id });
             let chat = new Room({
                 message: msg
             })
