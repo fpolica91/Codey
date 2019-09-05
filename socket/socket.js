@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const Room = require('../models/Room')
 const Code = require('../models/Code')
-
+let theValue = document.getElementsByClassName('title');
 
 function socket(io) {
     io.on('connection', (socket) => {
+        console.log("the socket was", socket)
         console.log('A user connected')
+        console.log(theValue);
         socket.on('chat message', function (msg) {
             socket.broadcast.emit("received", { message: msg });
             Room.create({

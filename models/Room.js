@@ -7,9 +7,7 @@ const roomSchema = new Schema(
     message: {
       type: String
     },
-    sender: {
-      type: String
-    }
+    sender: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   {
     timestamps: true
