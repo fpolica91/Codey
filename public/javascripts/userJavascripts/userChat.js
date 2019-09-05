@@ -1,11 +1,9 @@
-
 var socket = io();
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
-        console.log("The user is " + theUser);
         e.preventDefault();
         let li = document.createElement("li");
 
@@ -20,7 +18,6 @@ let theUser = $('.theUser').html();
     })
 
     socket.on("received", data => {
-        console.log(data);
         let li = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
@@ -29,7 +26,3 @@ let theUser = $('.theUser').html();
 
     });
 })();
-
-
-
-
