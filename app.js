@@ -22,12 +22,13 @@ const chatApi = require('./routes/APIS/chatAPI')
 const friendsApi = require('./routes/APIS/friendsApi')
 const userActions = require('./routes/userActions')
 require('./config/passportcongif')
+require("dotenv").config();
 
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://heroku_023bxvpl:5pumrelm6fjpejvbjnqalopvme@ds129023.mlab.com:29023/heroku_023bxvpl', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
