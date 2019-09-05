@@ -27,7 +27,7 @@ require('./config/passportcongif')
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/undefined', { useNewUrlParser: true })
+  .connect('mongodb://heroku_023bxvpl:5pumrelm6fjpejvbjnqalopvme@ds129023.mlab.com:29023/heroku_023bxvpl', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
