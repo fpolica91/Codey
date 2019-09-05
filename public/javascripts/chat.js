@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').val();
@@ -6,9 +6,11 @@ let theUser = $('.theUser').val();
 
 
 
+
 (function () {
     $("#sendForm").submit(function (e) {
-        // prevents page reloading
+        socket.emit("connection")
+        socket.emit("secret", id)
         e.preventDefault();
         let li = document.createElement("li");
         socket.emit("chat message", $("#message").val(), id);

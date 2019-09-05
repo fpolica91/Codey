@@ -5,8 +5,6 @@ const Schema = mongoose.Schema;
 const roomSchema = new Schema(
   {
     message: String,
-    // lobby: [{ type: Schema.Types.ObjectId, ref: "Lobby" }]
-    // sender: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
 
   {

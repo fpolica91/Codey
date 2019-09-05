@@ -39,12 +39,45 @@ const User = require('../models/User')
 
 
 
+
+
+// function socket(io) {
+//     let newCode;
+//     io.on('connection', (socket) => {
+//         console.log()
+//         socket.on('chat message', function (msg, id) {
+//             socket.broadcast.emit("received", { message: msg });
+//             let chat = new Room({
+//                 message: msg
+//             })
+//             chat.save()
+//             Lobby.findByIdAndUpdate(id, {
+//                 $push: {
+//                     messages: chat,
+//                     code: newCode
+//                 }
+//             }).then(data => console.log(data))
+//         })
+
+//         // END OF CHAT MESSAGES
+//         socket.on('send-code', (code) => {
+//             socket.broadcast.emit('code-message', code)
+//             newCode = new Code({
+//                 code: code
+//             })
+//             newCode.save()
+//         })
+//     })
+// }
+
+
+
 function socket(io) {
     let newCode;
     io.on('connection', (socket) => {
-        console.log()
         socket.on('chat message', function (msg, id) {
-            socket.broadcast.emit("received", { message: msg });
+            socket.join(id)
+            socket.broadcast.to(id).emit("received", { message: msg });
             let chat = new Room({
                 message: msg
             })
@@ -67,6 +100,7 @@ function socket(io) {
         })
     })
 }
+
 
 
 
