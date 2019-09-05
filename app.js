@@ -19,7 +19,6 @@ const session = require('express-session');
 const User = require('./models/User');
 const codeAPI = require('./routes/APIS/codeAPI')
 const chatApi = require('./routes/APIS/chatAPI')
-const runkit = require('./routes/runkit')
 const friendsApi = require('./routes/APIS/friendsApi')
 const userActions = require('./routes/userActions')
 require('./config/passportcongif')

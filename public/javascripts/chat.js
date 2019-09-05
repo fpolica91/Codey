@@ -1,15 +1,18 @@
-
-var socket = io();
+var socket = io()
+let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
-let theUser = $('.theUser').html();
+let theUser = $('.theUser').val();
+
+
+
+
 
 (function () {
     $("#sendForm").submit(function (e) {
-        // prevents page reloading
+        socket.emit("connection", id);
         e.preventDefault();
         let li = document.createElement("li");
-
-        socket.emit("chat message", $("#message").val());
+        socket.emit("chat message", $("#message").val(), id);
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
@@ -19,14 +22,13 @@ let theUser = $('.theUser').html();
         return false;
     })
 
-    socket.on("received", data => {
-        console.log(data);
-        let liReceive = document.createElement("li");
+
+    socket.on("received", (data) => {
+        let li = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");
         messages.appendChild(li).append(data.message);
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
-
     });
 })();
 

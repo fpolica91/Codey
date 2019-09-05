@@ -2,12 +2,6 @@
 
 
 <p>Welcome, {{user.username}}</p>
-
-
-
-
-
-
 <h4>Create a new Chatroom</h4>
 <label for="chatroom">Enter your Chatroom details here:</label>
 <form action="/create/chat" method="POST">
@@ -18,16 +12,13 @@
     <br>
     <label for="friends"> add friends</label>
     {{#each friendship}}
-    {{#if_eq this.status "accepted"}}
     <input type="checkbox" value="{{this.friend._id}}" name="friends"> <label> {{this.friend.username}}</label>
-    {{/if_eq}}
     {{/each}}
     <button type="submit">Submit</button>
 </form>
 
+
+<a href="/allchats">Enter Lobbies</a>
+
+
 {{/if}}
-
-{{#each userLobbies}}
-<p> your lobbies: {{this.name}} <a href="/userChats/{{this._id}}"> Enter Lobby</a> </p>
-
-{{/each}}

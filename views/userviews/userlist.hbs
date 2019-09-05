@@ -1,0 +1,6 @@
+{{#each userLobbies}}
+<p> your lobbies: {{this.name}} <a href="/userChats/{{this._id}}"> Enter Lobby</a> </p>
+<script id="helper" type="template/handlebars">
+      {{this._id}}
+    </script>
+{{/each}}
