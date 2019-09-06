@@ -1,8 +1,68 @@
+/* * {
+  box-sizing: border-box;
+} */
+
 body {
-  padding: 50px;
+
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
+/* a {
   color: #00B7FF;
+} */
+
+.mainNav{
+  /* display: inline-flex; */
+  padding-bottom: 30px;
+ justify-content: center;
+  width: 100vw;
+  height: 60px;
+  background: rgb(54,1,35);
+  background: linear-gradient(270deg, rgba(54,1,35,1) 10%, rgba(110,9,121,1) 39%, rgba(4,31,107,1) 100%);
 }
+
+.mainNav > a{
+  margin-right: 40px;
+ color: white;
+}
+
+.mainNav > a:hover{
+text-decoration: none;
+ color: gray;
+}
+
+.codeyLogo{
+  color: white;
+  font-size: 35px;
+  margin-right: 50px;
+}
+.codeyContainer{
+
+  height: 91vh;
+}
+
+.codeyParagraph{
+color: white;
+  font-size: 30px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.codeyTitle{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.codeyTitle > h1{
+  color: white;
+  font-size: 150px;
+}
+.mainBckgrd{
+  width: 100vw;
+  height: 93vh;
+  background-image: url('/images/pairProgramming.jpg');
+  background-size: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+

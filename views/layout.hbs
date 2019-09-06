@@ -15,18 +15,12 @@
 
 <body>
 
-  {{#if errorMessage}}
-  <div>{{errorMessage}}</div>
-  {{/if}}
-
-
-
-  {{#if successMessage}}
-  {{successMessage}}
-  {{/if}}
-
 
   <nav class="mainNav">
+    <span class="codeyLogo">
+{{title}}
+    </span>
+  
     {{#if currentUser}}
     <span>
       <h3 class="theUser">{{currentUser.username}}</h3>
@@ -50,6 +44,16 @@
     {{/if}}
 
     {{{body}}}
+
+{{#if errorMessage}}
+  <div>{{errorMessage}}</div>
+  {{/if}}
+
+
+
+  {{#if successMessage}}
+  <div>{{successMessage}}</div>
+  {{/if}}
 
 
 </body>
