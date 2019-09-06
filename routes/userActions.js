@@ -12,15 +12,15 @@ router.post('/create/chat', (req, res, next) => {
         friends,
         creator: req.user._id
     }).then(userLobbies => {
-        console.log(userLobbies)
+        res.redirect('/allchats')
     })
 })
 
 router.get('/allchats', (req, res, next) => {
-    Lobby.find({ $or:[ {friends: {$in: req.user._id }}, {creator: {$eq: req.user._id }} ] })
+    Lobby.find({ $or: [{ friends: { $in: req.user._id } }, { creator: { $eq: req.user._id } }] })
         .then(lobby => {
             let userLobbies = lobby.map(lobbie => {
-                    return lobbie;
+                return lobbie;
             })
             res.render('userviews/userlist', { userLobbies })
         }).catch(err => next(err))

@@ -17,7 +17,7 @@ let theUser = $('.theUser').html();
         return false;
     })
 
-    socket.on("received", data => {
+    socket.on("received", (data, theUser) => {
         let li = document.createElement("li");
         let span = document.createElement("span");
         var messages = document.getElementById("messages");

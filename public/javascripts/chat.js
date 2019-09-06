@@ -52,9 +52,7 @@ let theUser = $('.theUser').html();
 
 
 
-socket.on('code-message', data => {
-    code.value = data
-});
+
 
 
 
@@ -70,6 +68,9 @@ socket.on('code-message', data => {
             })
         socket.emit("send-code", da)
     })
+    socket.on('code-message', data => {
+        code.value = data
+    });
 })();
 
 
