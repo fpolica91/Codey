@@ -3,6 +3,16 @@ const router = express.Router();
 const User = require('../models/User');
 const bodyParser = require("body-parser");
 
+
+
+
+
+router.use((req, res, next) => {
+    if (!req.user) {
+        res.redirect("/login")
+    }
+    next()
+})
 //SEARCH USERS
 router.get('/searchUser', (req, res, next) => {
     console.log(req.query.userToSearch);

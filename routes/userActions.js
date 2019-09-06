@@ -4,6 +4,14 @@ const mongoose = require('mongoose')
 const Lobby = require('../models/Lobby')
 const User = require('../models/User')
 
+
+router.use((req, res, next) => {
+    if (!req.user) {
+        res.redirect("/login")
+    }
+    next()
+})
+
 router.post('/create/chat', (req, res, next) => {
     const { name, topic, friends } = req.body
     Lobby.create({
@@ -17,7 +25,7 @@ router.post('/create/chat', (req, res, next) => {
 })
 
 router.get('/allchats', (req, res, next) => {
-    Lobby.find({ $or:[ {friends: {$in: req.user.username }}, {creator: {$eq: req.user.username }} ] })
+    Lobby.find({ $or: [{ friends: { $in: req.user.username } }, { creator: { $eq: req.user.username } }] })
         .then(lobby => {
             let userLobbies = lobby.map(lobbie => {
                 return lobbie;
@@ -40,9 +48,9 @@ router.get('/allchats', (req, res, next) => {
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
-            res.render("Chat/userChats/userRoom",  {lobby: lobby, layout: false})
+            res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
             console.log(lobby)
-    })
+        })
         .catch(err => console.log("Errr while getting the chat ", err));
 })
 
