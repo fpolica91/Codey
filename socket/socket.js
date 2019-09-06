@@ -75,16 +75,14 @@ function socket(io) {
 
     io.on('connection', function (socket) {
         let theUrl = socket.handshake.headers.referer;
-       // console.log(theUrl);
+ 
         var trueUrl = url.parse(theUrl, true);
-       // console.log(trueUrl.pathname);
+    
         let hUrl = trueUrl.pathname.split('/');
-      //  console.log(hUrl[2]);
+     
         let realUrl = hUrl[2];
 
         socket.on('chat message', function (msg, theUser) {
-            console.log("THE USER COMES AFTER THIS")
-            console.log(theUser);
             socket.join(`${realUrl}`)
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg});
             let chat = new Room({

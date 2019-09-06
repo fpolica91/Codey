@@ -10,14 +10,14 @@ router.post('/create/chat', (req, res, next) => {
         name,
         topic,
         friends,
-        creator: req.user._id
+        creator: req.user.username
     }).then(userLobbies => {
         console.log(userLobbies)
     })
 })
 
 router.get('/allchats', (req, res, next) => {
-    Lobby.find({ $or:[ {friends: {$in: req.user._id }}, {creator: {$eq: req.user._id }} ] })
+    Lobby.find({ $or:[ {friends: {$in: req.user.username }}, {creator: {$eq: req.user.username }} ] })
         .then(lobby => {
             let userLobbies = lobby.map(lobbie => {
                     return lobbie;
@@ -39,7 +39,11 @@ router.get('/mess', (req, res, next) => {
 
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
-        .then(lobby => res.render("Chat/userChats/userRoom", lobby))
+        .then(lobby => {
+            res.render("Chat/userChats/userRoom",  {lobby: lobby, layout: false})
+            console.log(lobby)
+    })
+        .catch(err => console.log("Errr while getting the chat ", err));
 })
 
 

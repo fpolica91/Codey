@@ -35,9 +35,9 @@ let theUser = $('.theUser').html();
             return data.json();
         })
         .then(json => {
-            console.log(json[0]);
+
             json.map(data => {
-                console.log(data);
+              
                 let li = document.createElement("li");
                 let span = document.createElement("span");
                 messages.appendChild(li).append(data.message);
@@ -110,7 +110,6 @@ function formatTime(dateStr) {
     let theDay = dateStr.getDate();
     let theHours = dateStr.getHours();
     let theMinutes = dateStr.getMinutes();
-    console.log(typeof theMonth);
     if(theHours > 12){
         theHours -= 12;
         return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " PM";

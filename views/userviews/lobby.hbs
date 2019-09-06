@@ -12,7 +12,7 @@
     <br>
     <label for="friends"> add friends</label>
     {{#each friendship}}
-    <input type="checkbox" value="{{this.friend._id}}" name="friends"> <label> {{this.friend.username}}</label>
+    <input type="checkbox" value="{{this.friend.username}}" name="friends"> <label> {{this.friend.username}}</label>
     {{/each}}
     <button type="submit">Submit</button>
 </form>

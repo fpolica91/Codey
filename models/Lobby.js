@@ -9,9 +9,9 @@ const lobbySchema = new Schema({
     },
     topic: String,
     messages: [{ type: Schema.Types.ObjectId, ref: "Room" }],
-    friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    friends: [String],
     code: [{ type: Schema.Types.ObjectId, ref: "Code" }],
-    creator: { type: Schema.Types.ObjectId, ref: 'User' }
+    creator: String
 })
 
 const Lobby = mongoose.model("Lobby", lobbySchema)
