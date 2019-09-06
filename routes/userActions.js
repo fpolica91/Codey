@@ -12,7 +12,7 @@ router.post('/create/chat', (req, res, next) => {
         friends,
         creator: req.user.username
     }).then(userLobbies => {
-        console.log(userLobbies)
+        res.redirect('/allchats')
     })
 })
 
@@ -20,7 +20,7 @@ router.get('/allchats', (req, res, next) => {
     Lobby.find({ $or:[ {friends: {$in: req.user.username }}, {creator: {$eq: req.user.username }} ] })
         .then(lobby => {
             let userLobbies = lobby.map(lobbie => {
-                    return lobbie;
+                return lobbie;
             })
             res.render('userviews/userlist', { userLobbies })
         }).catch(err => next(err))
@@ -28,13 +28,13 @@ router.get('/allchats', (req, res, next) => {
 
 
 
-router.get('/mess', (req, res, next) => {
-    Lobby.findById("5d6d868d22fae605d0531dad")
-        .populate("messages")
-        .exec((err, messages) => {
-            res.json(messages)
-        })
-})
+// router.get('/mess', (req, res, next) => {
+//     Lobby.findById("5d6d868d22fae605d0531dad")
+//         .populate("messages")
+//         .exec((err, messages) => {
+//             res.json(messages)
+//         })
+// })
 
 
 router.get('/userChats/:id', (req, res, next) => {
