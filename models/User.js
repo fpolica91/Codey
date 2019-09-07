@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const friends = require('mongoose-friends');
 const Schema = mongoose.Schema;
+const Joi = require('joi')
 
 const userSchema = new Schema({
     username: {
@@ -23,7 +24,24 @@ const userSchema = new Schema({
 },
     { timestamps: true }
 )
+
+function validateUser(user) {
+    const schema = {
+        username: Joi.string()
+            .min(4)
+            .max(20)
+            .required(),
+        email: Joi.string()
+            .email()
+            .required(),
+        password: Joi.string()
+            .required()
+    }
+    return Joi.validate(user, schema)
+}
+
 userSchema.plugin(friends({ pathName: "friends" }))
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+module.validate = validateUser
