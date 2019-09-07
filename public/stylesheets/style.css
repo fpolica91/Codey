@@ -135,7 +135,7 @@ text-align: center;
 }
 
 .signupForm,.loginForm{
-  margin: 0px 500px;
+  margin: 0px 20%;
 }
 
 .theErrorMessage{

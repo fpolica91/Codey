@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/stylesheets/lobby.css">
+
 {{#if user }}
 
 
@@ -17,14 +19,14 @@
                 <label for="topic">Specify Topic</label>
                 <input class="form-control" type="text" name="topic">
             </div>
-            <div class="custom-control custom-checkbox">
+            <div class="form-group col-md-4">
                 <label for="friends"> add friends: </label>
                 <br>
                 {{#each friendship}}
-                <ul>
-                    <li>
+                <ul class="list-group">
+                    <li class="list-group-item">
                         <input type="checkbox" value="{{this.friend.username}}" name="friends">
-                        <label>
+                        <label class="username">
                             {{this.friend.username}}
                         </label>
                     </li>
@@ -38,5 +40,8 @@
 
 <a href="/allchats">Enter Lobbies</a>
 
+{{!-- {{#each userLobbies}}
+{{this._id}}
+{{/each}} --}}
 
 {{/if}}
