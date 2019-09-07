@@ -13,6 +13,7 @@ body {
 
 .mainNav{
   /* display: inline-flex; */
+  z-index: 10;
   padding-bottom: 30px;
  justify-content: center;
   width: 100vw;
@@ -30,6 +31,46 @@ body {
 text-decoration: none;
  color: gray;
 }
+
+.userNav {
+  margin-left: 30px;
+}
+
+.userNav ul{
+  list-style-type: none;
+  display: block;
+}
+.userNav li{
+  float: left;
+}
+
+.userNav a {
+  color: white;
+  font-weight: bold;
+text-decoration-style: none;
+margin-right: 30px;
+}
+
+.userNav a:hover{
+  color: rgb(211, 198, 198);
+text-decoration-line: none;
+}
+
+.codey-nav-item a{
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-nav{
+  color: white;
+}
+
+.codey-nav-item a:hover{
+  color: rgb(211, 198, 198);
+text-decoration-line: none;
+}
+
+
 
 .codeyLogo{
   color: white;
@@ -62,7 +103,86 @@ color: white;
   height: 93vh;
   background-image: url('/images/pairProgramming.jpg');
   background-size: cover;
-  image-rendering: -webkit-optimize-contrast;
 }
 
 
+/* USER LOGGED IN CSS */
+.logOut{
+  position: absolute;
+  left: 80%;
+}
+
+.logOutForm > button{
+  font-size: 20px;
+  color: white;
+  background-color: transparent;
+  border: 0px;
+
+}
+
+.welcomeUser{
+  font-family: Calibri;
+  font-weight: bold;
+  color: white;
+  font-size: 35px;
+}
+
+
+/* LOGGING AND SIGN UP CSS */
+.signUpTitle, .loginTitle{
+  margin-top: 50px;
+text-align: center;
+}
+
+.signupForm,.loginForm{
+  margin: 0px 500px;
+}
+
+.theErrorMessage{
+  text-align: center;
+  margin-top: 40px;
+  width: 50%;
+  color: red;
+  border: 1px solid red;
+  margin-left: 26vw;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .show{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.899);
+    width: 50px;
+  }
+
+  .userNav li{
+    margin: 30px;
+    float: none;
+  }
+
+  .userNav a {
+    color: rgba(0, 0, 0, 0.774);
+    font-weight: bold;
+  text-decoration-style: none;
+  margin-right: 30px;
+  }
+  
+  .userNav a:hover{
+    color: rgb(211, 198, 198);
+  text-decoration-line: none;
+  }
+
+  .welcomeUser{
+    color: rgba(0, 0, 0, 0.774);
+
+  }
+  
+  .logOutForm > button{
+    color: rgba(0, 0, 0, 0.774);
+    font-weight: bold;
+  }
+
+  .logOut{
+    position: static;
+  }
+}
