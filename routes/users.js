@@ -53,15 +53,20 @@ router.get('/login', (req, res, next) => {
 //   failureFlash: true,
 //   passReqToCallback: true,
 // }))
+
+// SETS VALUE OF USER.IS_ACTIVE TO true
 router.post('/login', passport.authenticate('local', {
   // successRedirect: "/",
   failureRedirect: '/login',
   failureFlash: true,
   passReqToCallback: true,
 }), function (req, res) {
-  req.user.is_active = true
-  res.redirect('/')
-  console.log(req.user.is_active)
+  req.user._id
+  User.findByIdAndUpdate(req.user._id, {
+    is_active: true
+  }).then(user => {
+    res.redirect('/')
+  })
 })
 
 // AUTH USING SLACK
@@ -104,9 +109,16 @@ router.get('/lobby/:id', (req, res, next) => {
 
 
 
+
+//SETS VALUE OF USER.IS_ACTIVE TO FALSE
 router.post('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
+  User.findByIdAndUpdate(req.user._id, {
+    is_active: false
+  }).then(user => {
+    req.logout()
+  }).then(() => {
+    res.redirect('/');
+  })
 })
 
 module.exports = router;
