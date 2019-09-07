@@ -48,8 +48,9 @@ router.get('/allchats', (req, res, next) => {
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
+
             res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
-            console.log(lobby)
+
         })
         .catch(err => console.log("Errr while getting the chat ", err));
 })

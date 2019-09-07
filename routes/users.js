@@ -47,12 +47,22 @@ router.get('/login', (req, res, next) => {
 })
 
 
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: "/",
+//   failureRedirect: '/login',
+//   failureFlash: true,
+//   passReqToCallback: true,
+// }))
 router.post('/login', passport.authenticate('local', {
-  successRedirect: "/",
+  // successRedirect: "/",
   failureRedirect: '/login',
   failureFlash: true,
-  passReqToCallback: true
-}))
+  passReqToCallback: true,
+}), function (req, res) {
+  req.user.is_active = true
+  res.redirect('/')
+  console.log(req.user.is_active)
+})
 
 // AUTH USING SLACK
 
