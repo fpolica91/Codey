@@ -4,6 +4,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const passport = require('passport')
 
+
 /* GET users listing. */
 router.get('/signup', (req, res, next) => {
   res.render('userviews/signup');
@@ -54,7 +55,7 @@ router.get("/auth/slack", passport.authenticate("slack"))
 
 router.get("/auth/slack/callback",
   passport.authenticate("slack", {
-    successRedirect: "/chats",
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 )
@@ -64,8 +65,8 @@ router.get("/auth/github", passport.authenticate('github'))
 
 router.get("/auth/github/callback",
   passport.authenticate('github', {
-    successRedirect: "/chats",
-    failureRedirect: "/"
+    successRedirect: "/",
+    failureRedirect: "/login"
   })
 )
 
