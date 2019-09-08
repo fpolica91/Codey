@@ -15,20 +15,29 @@ friendButton.onclick = function(){
             return eachFriend.status === "accepted"
         })
         console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Friends"
-        theFriendList.innerHTML = ""
+        theFriendListTitle.innerHTML = ""
+        let friendTitle = document.createElement('h2');
+        let theTitle = document.createTextNode('Friends');
+        friendTitle.appendChild(theTitle);
+        theFriendList.innerHTML = "";
+        theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
+            let listElement = document.createElement('div');
+            listElement.setAttribute('class', 'friendlist-div')
+            let namePlace = document.createElement('p');
             let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
-
+            namePlace.appendChild(nameFriend);
             let deleteForm = document.createElement('form');
+            deleteForm.setAttribute('class', 'friendlist-item')
             deleteForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
             deleteForm.setAttribute('method', 'POST');
+
             let deleteButton = document.createElement('button');
+            deleteButton.setAttribute('class', 'deleteFriendBtn')
             let buttonText = document.createTextNode("Remove Friend");
             deleteButton.append(buttonText);
             deleteForm.append(deleteButton);
-            listElement.append(nameFriend);
+            listElement.append(namePlace);
             listElement.append(deleteForm);
             theFriendList.append(listElement);
            // theFriendList.append(deleteForm);
@@ -46,8 +55,12 @@ pendingButton.onclick = function(){
             return eachFriend.status === "pending"
         })
         console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Pending"
+        theFriendListTitle.innerHTML = ""
+        let friendTitle = document.createElement('h2');
+        let theTitle = document.createTextNode('Pending');
+        friendTitle.appendChild(theTitle);
         theFriendList.innerHTML = ""
+        theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
             let listElement = document.createElement('li')
             let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
@@ -87,8 +100,12 @@ requestButton.onclick = function(){
             return eachFriend.status === "requested"
         })
         console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Requested"
+        theFriendListTitle.innerHTML = ""
+        let friendTitle = document.createElement('h2');
+        let theTitle = document.createTextNode('Requested');
+        friendTitle.appendChild(theTitle);
         theFriendList.innerHTML = "";
+        theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
             let listElement = document.createElement('li')
             let textNode = document.createTextNode(`${eachFriend.friend.username}`);
