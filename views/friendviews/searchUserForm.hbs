@@ -1,20 +1,27 @@
-<form action="/searchUser" method="GET">
-<label>Username</label>
-<input type="text" name="userToSearch">
-<button>Search</button>
-</form>
+<div class="container">
+    <div class="form-group">
+        <form action="/searchUser" method="GET">
+            <label>Username</label>
+            <input type="text" name="userToSearch">
+    </div>
+    <button class="btn btn-sm btn-primary">Search</button>
+    </form>
 
-<form action="/AddNewFriend" method="POST">
-<label>Username</label>
-<input type="text" name="name">
-<button>Add Friend</button>
-</form>
+
+    <form action="/AddNewFriend" method="POST">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="name">
+        </div>
+        <button class="btn btn-sm btn-primary">Add Friend</button>
+    </form>
+</div>
 
 <ul>
     {{#if theUser}}
 
-{{#each theUser}}
-<li>{{this.username}}</li>
+    {{#each theUser}}
+    <li>{{this.username}}</li>
 
     {{!-- <form action="/AddNewFriend" method="POST">
 <button class="addFriend" value="{{this._id}}">ADD FRIEND</button>

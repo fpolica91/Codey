@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const passport = require('passport')
+const Lobby = require('../models/Lobby')
 
 
 /* GET users listing. */
@@ -24,17 +25,21 @@ router.post('/signup', (req, res, next) => {
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(thePassword, salt);
 
+
   User.create({
     username: theUsername,
     password: hashedPassword,
     email: theEmail
   })
-    .then(() => {
-      res.redirect('/')
+    .then((user) => {
+      res.redirect('/login')
     })
     .catch((err) => {
-      next(err)
+      req.flash('error', "username and email must be unique")
+      res.redirect('/signup')
     })
+
+
 })
 
 router.get('/login', (req, res, next) => {
@@ -42,12 +47,27 @@ router.get('/login', (req, res, next) => {
 })
 
 
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: "/",
+//   failureRedirect: '/login',
+//   failureFlash: true,
+//   passReqToCallback: true,
+// }))
+
+// SETS VALUE OF USER.IS_ACTIVE TO true
 router.post('/login', passport.authenticate('local', {
-  successRedirect: "/",
+  // successRedirect: "/",
   failureRedirect: '/login',
   failureFlash: true,
-  passReqToCallback: true
-}))
+  passReqToCallback: true,
+}), function (req, res) {
+  req.user._id
+  User.findByIdAndUpdate(req.user._id, {
+    is_active: true
+  }).then(user => {
+    res.redirect('/')
+  })
+})
 
 // AUTH USING SLACK
 
@@ -74,6 +94,12 @@ router.get("/auth/github/callback",
 router.get('/lobby/:id', (req, res, next) => {
   User.findById(req.params.id)
     .then(user => {
+      // in case you want to render lobbies in the same page as form ->> jesus es un amawebo
+      // Lobby.find({ $or: [{ friends: { $in: user.username } }, { creator: { $eq: user.username } }] })
+      //   .then(lobby => {
+      //     let userLobbies = lobby.map(lobbie => {
+      //       return lobbie;
+      //     })
       User.getFriends(user, function (err, friendship) {
         res.render('userviews/lobby', { user, friendship })
       })
@@ -83,9 +109,16 @@ router.get('/lobby/:id', (req, res, next) => {
 
 
 
+
+//SETS VALUE OF USER.IS_ACTIVE TO FALSE
 router.post('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
+  User.findByIdAndUpdate(req.user._id, {
+    is_active: false
+  }).then(user => {
+    req.logout()
+  }).then(() => {
+    res.redirect('/');
+  })
 })
 
 module.exports = router;

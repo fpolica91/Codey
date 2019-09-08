@@ -1,24 +1,47 @@
+<link rel="stylesheet" href="/stylesheets/lobby.css">
+
 {{#if user }}
 
 
 {{!-- <p>Welcome, {{user.username}}</p> --}}
 <h4>Create a new Chatroom</h4>
-<label for="chatroom">Enter your Chatroom details here:</label>
-<form action="/create/chat" method="POST">
-    <label for="name">Enter Chatroom Name</label>
-    <input type="text" name="name">
-    <label for="topic">Specify Topic</label>
-    <input type="text" name="topic">
-    <br>
-    <label for="friends"> add friends</label>
-    {{#each friendship}}
-    <input type="checkbox" value="{{this.friend.username}}" name="friends"> <label> {{this.friend.username}}</label>
-    {{/each}}
-    <button type="submit">Submit</button>
-</form>
 
+<label for="chatroom">Enter your Chatroom details here:</label>
+<div class="container">
+    <form action="/create/chat" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Enter Chatroom Name</label>
+                <input class="form-control" type="text" name="name">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="topic">Specify Topic</label>
+                <input class="form-control" type="text" name="topic">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="friends"> add friends: </label>
+                <br>
+                {{#each friendship}}
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input type="checkbox" value="{{this.friend.username}}" name="friends">
+                        <label class="username">
+                            {{this.friend.username}}
+                        </label>
+                    </li>
+                </ul>
+                {{/each}}
+            </div>
+        </div>
+        <button class="btn  btn-primary" type="submit">Submit</button>
+    </form>
+</div>
 
 <a href="/allchats">Enter Lobbies</a>
 
+{{!-- {{#each userLobbies}}
+{{this._id}}
+{{/each}} --}}
 
 {{/if}}
