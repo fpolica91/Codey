@@ -36,23 +36,27 @@ router.get('/allchats', (req, res, next) => {
 
 
 
-// router.get('/mess', (req, res, next) => {
-//     Lobby.findById("5d6d868d22fae605d0531dad")
-//         .populate("messages")
-//         .exec((err, messages) => {
-//             res.json(messages)
-//         })
-// })
+
+
 
 
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
-
             res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
-
         })
         .catch(err => console.log("Errr while getting the chat ", err));
+})
+
+
+router.post('/removeFriendChat/:name', (req, res, next) => {
+    console.log(req.params.name)
+    Lobby.findOneAndUpdate({ friends: { $in: req.params.name } }, {
+        $pull: {
+            friends: req.params.name
+        }
+    }).then(res.redirect('back'))
+        .catch(err => next(err))
 })
 
 

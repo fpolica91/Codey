@@ -38,8 +38,6 @@ router.post('/signup', (req, res, next) => {
       req.flash('error', "username and email must be unique")
       res.redirect('/signup')
     })
-
-
 })
 
 router.get('/login', (req, res, next) => {
