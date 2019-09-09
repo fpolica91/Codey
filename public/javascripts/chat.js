@@ -41,7 +41,13 @@ let theUser = $('.theUser').html();
                 //   console.log(data);
                 let li = document.createElement("li");
                 let span = document.createElement("span");
+                if(data.sender === theUser){
+                    li.setAttribute('class', 'senderMsg');
+                }else{
+                    li.setAttribute('class', 'receiverMsg');
+                }
                 messages.appendChild(li).append(data.message);
+                console.log(data.sender);
                 messages
                     .appendChild(span)
                     .append("by " + data.sender + ": " + formatTime(new Date(data.createdAt)));
