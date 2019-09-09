@@ -38,12 +38,43 @@ router.get('/allchats', (req, res, next) => {
 
 
 
+router.get('/userChats/edit/:id', (req, res, next) => {
+    Lobby.findById(req.params.id)
+        .then(lobby => {
+            User.findOne({ username: lobby.creator })
+                .then(user => {
+                    User.getFriends(user, function (err, friendship) {
+                        res.render("Chat/userChats/editRoom", {
+                            friendship,
+                            lobby
+                        })
+                    })
+                })
+                .catch(err => next(err))
+        })
+        .catch(err => next(err))
+})
+
+// "/chatroom/{{lobby._id}}/edited"
+
+router.post('/chatroom/:id/edited', (req, res, next) => {
+    Lobby.findByIdAndUpdate(req.params.id, req.body)
+        .then(res.redirect('/allchats'))
+        .catch(err => next(err))
+})
+
+
+
 
 
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
-            res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
+            if (lobby.creator === req.user.username) {
+                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username })
+            } else {
+                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
+            }
         })
         .catch(err => console.log("Errr while getting the chat ", err));
 })

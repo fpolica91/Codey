@@ -98,7 +98,7 @@ router.get('/lobby/:id', (req, res, next) => {
       //     let userLobbies = lobby.map(lobbie => {
       //       return lobbie;
       //     })
-      User.getFriends(user, function (err, friendship) {
+      User.getAcceptedFriends(user, function (err, friendship) {
         res.render('userviews/lobby', { user, friendship })
       })
     })

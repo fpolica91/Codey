@@ -7,94 +7,95 @@ let theFriendListTitle = document.getElementById('friendTitle');
 let theFriendList = document.getElementById('listFriend');
 
 
-friendButton.onclick = function(){
+friendButton.onclick = function () {
     axios.get('/friends')
-    .then(response => {
-        console.log(response.data)
-        let friendAccepted = response.data.filter(eachFriend => {
-            return eachFriend.status === "accepted"
-        })
-        console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Friends"
-        theFriendList.innerHTML = ""
-        friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
-            let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
+        .then(response => {
+            console.log(response.data)
+            let friendAccepted = response.data.filter(eachFriend => {
+                return eachFriend.status === "accepted"
+            })
+            console.log(friendAccepted);
+            theFriendListTitle.innerHTML = "Friends"
+            theFriendList.innerHTML = ""
+            friendAccepted.forEach(eachFriend => {
+                let listElement = document.createElement('li')
+                let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
 
-            let deleteForm = document.createElement('form');
-            deleteForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
-            deleteForm.setAttribute('method', 'POST');
-            let deleteButton = document.createElement('button');
-            let buttonText = document.createTextNode("Remove Friend");
-            deleteButton.append(buttonText);
-            deleteForm.append(deleteButton);
-            listElement.append(nameFriend);
-            listElement.append(deleteForm);
-            theFriendList.append(listElement);
-           // theFriendList.append(deleteForm);
+                let deleteForm = document.createElement('form');
+                deleteForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
+                deleteForm.setAttribute('method', 'POST');
+                let deleteButton = document.createElement('button');
+                let buttonText = document.createTextNode("Remove Friend");
+                deleteButton.append(buttonText);
+                deleteForm.append(deleteButton);
+                listElement.append(nameFriend);
+                listElement.append(deleteForm);
+                theFriendList.append(listElement);
+                // theFriendList.append(deleteForm);
 
+            })
         })
-    })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
 
-pendingButton.onclick = function(){
+pendingButton.onclick = function () {
     axios.get('/pending')
-    .then(response => {
-        console.log(response.data)
-        let friendAccepted = response.data.filter(eachFriend => {
-            return eachFriend.status === "pending"
+        .then(response => {
+            console.log(response.data)
+            let friendAccepted = response.data.filter(eachFriend => {
+                return eachFriend.status === "pending"
+            })
+            console.log(friendAccepted);
+            theFriendListTitle.innerHTML = "Pending"
+            theFriendList.innerHTML = ""
+            friendAccepted.forEach(eachFriend => {
+                let listElement = document.createElement('li')
+                let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
+
+                let acceptForm = document.createElement('form');
+                acceptForm.setAttribute("action", `/acceptRequest/${eachFriend.friend._id}`)
+                acceptForm.setAttribute('method', 'POST');
+                let addButon = document.createElement('button');
+                let buttonText = document.createTextNode("Accept");
+
+                let declineForm = document.createElement('form');
+                declineForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
+                declineForm.setAttribute('method', 'POST');
+                let declineButton = document.createElement('button');
+                let declineButtonText = document.createTextNode("Decline");
+                declineButton.append(declineButtonText);
+                declineForm.append(declineButton);
+
+                declineButton.append(declineButtonText);
+                addButon.append(buttonText);
+                acceptForm.append(addButon);
+                declineForm.append(declineButton);
+                listElement.append(nameFriend);
+                listElement.append(acceptForm);
+                listElement.append(declineForm);
+                theFriendList.append(listElement);
+            })
         })
-        console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Pending"
-        theFriendList.innerHTML = ""
-        friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
-            let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
-
-            let acceptForm = document.createElement('form');
-            acceptForm.setAttribute("action", `/acceptRequest/${eachFriend.friend._id}`)
-            acceptForm.setAttribute('method', 'POST');
-            let addButon = document.createElement('button');
-            let buttonText = document.createTextNode("Accept");
-
-            let declineForm = document.createElement('form');
-            declineForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
-            declineForm.setAttribute('method', 'POST');
-            let declineButton = document.createElement('button');
-            let declineButtonText = document.createTextNode("Decline");
-            declineButton.append(declineButtonText);
-            declineForm.append(declineButton);
-
-            declineButton.append(declineButtonText);
-            addButon.append(buttonText);
-            acceptForm.append(addButon);
-            declineForm.append(declineButton);
-            listElement.append(nameFriend);
-            listElement.append(acceptForm);
-            listElement.append(declineForm);
-            theFriendList.append(listElement);
-        })
-    })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
 
-requestButton.onclick = function(){
+requestButton.onclick = function () {
     axios.get('/requested')
-    .then(response => {
-        console.log(response.data)
-        let friendAccepted = response.data.filter(eachFriend => {
-            return eachFriend.status === "requested"
+        .then(response => {
+            console.log(response.data)
+            let friendAccepted = response.data.filter(eachFriend => {
+                return eachFriend.status === "requested"
+            })
+            console.log(friendAccepted);
+            theFriendListTitle.innerHTML = "Requested"
+            theFriendList.innerHTML = "";
+            friendAccepted.forEach(eachFriend => {
+                let listElement = document.createElement('li')
+                let textNode = document.createTextNode(`${eachFriend.friend.username}`);
+                listElement.append(textNode);
+                theFriendList.append(listElement);
+            })
         })
-        console.log(friendAccepted);
-        theFriendListTitle.innerHTML = "Requested"
-        theFriendList.innerHTML = "";
-        friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
-            let textNode = document.createTextNode(`${eachFriend.friend.username}`);
-            listElement.append(textNode);
-            theFriendList.append(listElement);
-        })
-    })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
+

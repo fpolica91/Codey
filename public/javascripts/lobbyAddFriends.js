@@ -1,18 +1,48 @@
 
-const ul = document.getElementsByClassName('chatUserList')
+// const ul = document.getElementsByClassName('chatUserList')
+// const container = document.getElementsByClassName('listOfUserFriends')
 
-// THIS ROUTE GETS ALL THE FRIENDS OF THE USER
-function getFriends() {
-    axios.get('/friends')
-        .then(response => {
-            response.data.map(item => {
-                console.log(item);
-                let li = document.createElement('li')
-                let users = item.friend.username
-                li.append(users);
-                ul.append(li);
-            })
-        })
-}
+// // THIS ROUTE GETS ALL THE FRIENDS OF THE USER
 
-getFriends();
+// function setAttributes(el, attrs) {
+//     for (var key in attrs) {
+//         el.setAttribute(key, attrs[key]);
+//     }
+// }
+
+
+
+
+
+
+// function getFriends() {
+//     axios.get('/friends')
+//         .then(response => {
+//             response.data.friendship.map(item => {
+//                 let userName = document.createTextNode(`${item.friend.username}`)
+//                 let listElement = document.createElement('li')
+//                 let input = document.createElement('input')
+//                 setAttributes(input, {
+//                     "type": "checkbox",
+//                     "value": item.friend.username,
+//                     "class": "userFriendName"
+
+//                 })
+//                 listElement.append(input)
+//                 listElement.appendChild(userName)
+//                 container[0].append(listElement)
+//             })
+//         })
+//         .catch(err => console.log(err))
+// }
+
+
+// getFriends()
+
+
+
+
+
+
+
+
