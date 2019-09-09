@@ -10,7 +10,7 @@ function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
-        console.log(socket);
+
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
@@ -21,6 +21,7 @@ function socket(io) {
 
         socket.on('chat message', function (msg, theUser) {
             socket.join(`${realUrl}`)
+
 
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg });
             let chat = new Room({

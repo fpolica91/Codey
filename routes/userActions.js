@@ -63,7 +63,9 @@ router.post('/removeFriendChat/:name', (req, res, next) => {
         $pull: {
             friends: req.params.name
         }
-    }).then(res.redirect('back'))
+    })
+    next()
+        // .then(res.redirect('back'))
         .catch(err => next(err))
 })
 
