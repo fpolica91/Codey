@@ -21,7 +21,7 @@
   align-items: center;
   text-align: center;
  width: 100vw;
-  background-color: rgba(15, 15, 15, 0.815);
+ background: linear-gradient(270deg, rgba(54,1,35,1) 10%, rgba(110,9,121,1) 39%, rgba(4,31,107,1) 100%);
   color: white;
 }
 
@@ -194,8 +194,8 @@
     width: 130px;
     height: 40px;
     border-radius: 50px;
-    background-color: #305EA1;
-    border: 2px solid #305EA1;
+    background-color: rgb(129, 2, 97);
+    border: 2px solid rgb(129, 2, 97);
     color: #fff;
     cursor: pointer;
     transition: all 0.2s linear;
@@ -209,10 +209,7 @@
     height: 40px;
     border-radius: 50px;
   }
-  .bottom_wrapper .send_message:hover {
-    color: #a3d063;
-    background-color: #fff;
-  }
+
   .bottom_wrapper .send_message .text {
     font-size: 18px;
     font-weight: 300;
@@ -223,25 +220,37 @@
   .message_template {
     display: none;
   }
-  
-  .messages > li {
-    font-size: 15px;
-    color: rgb(13, 223, 153);
-    background: #f7a30675;
-    border-radius: 5px;
-    width: fit-content;
-  }
+
   
   .messages > span {
     font-size: 10px;
     font-style: italic;
   }
   
+  .senderMsg{
+    font-size: 15px;
+    border: 3px solid #39a7d3fd;
+    color: rgb(0, 0, 0);
+    background: #39a7d3fd;
+    border-radius: 5px;
+    width: fit-content;
+  }
+
+  .receiverMsg {
+    font-size: 15px;
+    border: 3px solid #a2a6a8fd;
+    color: rgb(0, 0, 0);
+    background: #a2a6a8fd;
+    border-radius: 5px;
+    width: fit-content;
+  }
+
   .editor{
     display: flex;
     justify-content: center;
     /* border: 1px solid yellow; */
     display: inline;
+    background-color: rgba(15, 15, 15, 0.815);
   
   }
   
@@ -271,19 +280,42 @@
     width: 130px;
     height: 50px;
     border-radius: 20px;
-    background-color: rgb(129, 2, 97);
-    border: 1px solid rgb(129, 2, 97);
+    background-color: #305EA1;
+    border: 2px solid #305EA1;
   }
 
-  /* #compilerText{
+  #compilerText{
     font-family: monospace;
-    margin-top: 10px;
+ 
     overflow: scroll;
     display: block;
-    color: rgb(12, 194, 28);
+    /* color: rgb(12, 194, 28); */
     background-color: black;
     border: 1px solid black;
     width: 100%;
-    height: 200px;
+    height: 170px;
     text-align: left;
-  } */
+  }
+  
+.javaScriptError{
+  color: red;
+}
+.style-1::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+}
+
+.style-1::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: rgb(0, 0, 0);
+}
+
+.style-1::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rgb(32, 29, 29);
+}

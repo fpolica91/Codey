@@ -1,20 +1,20 @@
-<div class="container">
-    <div class="form-group">
+<div class="container searchUserContainer">
+    <div class="form-group searchUserForm">
         <form action="/searchUser" method="GET">
             <label>Username</label>
             <input type="text" name="userToSearch">
+                <button class="searchUserBtn">Search</button>
     </div>
-    <button class="btn btn-sm btn-primary">Search</button>
+
     </form>
 
-
+  <div class="form-group searchUserForm">
     <form action="/AddNewFriend" method="POST">
-        <div class="form-group">
             <label>Username</label>
             <input type="text" name="name">
-        </div>
-        <button class="btn btn-sm btn-primary">Add Friend</button>
+            <button class="searchUserBtn">Add Friend</button>
     </form>
+  </div>
 </div>
 
 <ul>
@@ -35,4 +35,6 @@
 {{!-- {{#if errorMessage}}
 <div>{{errorMessage}}</div>
 {{/if}} --}}
-<a href="/">Go back</a>
+<div class="searchGoBack">
+<a href="/"><i class="arrow left"></i>Go back</a>
+</div>

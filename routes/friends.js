@@ -50,9 +50,19 @@ router.get('/friendlist', (req, res, next) => {
 router.post('/AddNewFriend', (req, res, next) => {
     User.findOne({ username: req.body.name })
         .then(user => {
-            console.log(user)
+            console.log(user);
+            if(user === null){
+                req.flash('error', `${req.body.name} does not exist!`);
+                res.redirect('/searchUser');
+            }
+            else if(user.username === req.user.username){
+                req.flash('error', ` You cannot add yourself`);
+                res.redirect('/searchUser');
+            }else{
+            req.flash('success', `Your request to ${user.username} has been sent`);
             User.requestFriend(req.user._id, user._id);
-            res.render('friendviews/friendList');
+            res.redirect('/searchUser');
+        }
         })
         .catch((err) => console.log("An error just happened ", err))
 })

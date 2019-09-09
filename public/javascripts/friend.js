@@ -23,7 +23,7 @@ friendButton.onclick = function(){
         theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
             let listElement = document.createElement('div');
-            listElement.setAttribute('class', 'friendlist-div')
+            listElement.setAttribute('class', 'friendlist-div');
             let namePlace = document.createElement('p');
             let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
             namePlace.appendChild(nameFriend);
@@ -33,7 +33,7 @@ friendButton.onclick = function(){
             deleteForm.setAttribute('method', 'POST');
 
             let deleteButton = document.createElement('button');
-            deleteButton.setAttribute('class', 'deleteFriendBtn')
+            deleteButton.setAttribute('class', 'deleteFriendBtn');
             let buttonText = document.createTextNode("Remove Friend");
             deleteButton.append(buttonText);
             deleteForm.append(deleteButton);
@@ -62,19 +62,23 @@ pendingButton.onclick = function(){
         theFriendList.innerHTML = ""
         theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
+            let listElement = document.createElement('div')
+            listElement.setAttribute('class', 'friendlist-div');
+            let namePlace = document.createElement('p');
             let nameFriend = document.createTextNode(`${eachFriend.friend.username}`);
-
+            namePlace.appendChild(nameFriend);
             let acceptForm = document.createElement('form');
             acceptForm.setAttribute("action", `/acceptRequest/${eachFriend.friend._id}`)
             acceptForm.setAttribute('method', 'POST');
             let addButon = document.createElement('button');
+            addButon.setAttribute('class', 'addFriendBtn');
             let buttonText = document.createTextNode("Accept");
 
             let declineForm = document.createElement('form');
             declineForm.setAttribute("action", `/delete/${eachFriend.friend._id}`)
             declineForm.setAttribute('method', 'POST');
             let declineButton = document.createElement('button');
+            declineButton.setAttribute('class', 'deleteFriendBtn')
             let declineButtonText = document.createTextNode("Decline");
             declineButton.append(declineButtonText);
             declineForm.append(declineButton);
@@ -83,7 +87,7 @@ pendingButton.onclick = function(){
             addButon.append(buttonText);
             acceptForm.append(addButon);
             declineForm.append(declineButton);
-            listElement.append(nameFriend);
+            listElement.append(namePlace);
             listElement.append(acceptForm);
             listElement.append(declineForm);
             theFriendList.append(listElement);
@@ -107,9 +111,12 @@ requestButton.onclick = function(){
         theFriendList.innerHTML = "";
         theFriendListTitle.appendChild(friendTitle);
         friendAccepted.forEach(eachFriend => {
-            let listElement = document.createElement('li')
+            let listElement = document.createElement('div');
+            listElement.setAttribute('class', 'friendlist-div');
+            let namePlace = document.createElement('p');
             let textNode = document.createTextNode(`${eachFriend.friend.username}`);
-            listElement.append(textNode);
+            namePlace.append(textNode);
+            listElement.append(namePlace);
             theFriendList.append(listElement);
         })
     })

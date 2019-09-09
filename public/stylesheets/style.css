@@ -146,6 +146,15 @@ text-align: center;
   margin-left: 26vw;
 }
 
+.theSuccessMessage{
+  text-align: center;
+  margin-top: 40px;
+  width: 50%;
+  color: green;
+  border: 1px solid green;
+  margin-left: 26vw;
+}
+
 /* FRIEND LIST CSS */
 
 .friendContainer {
@@ -175,7 +184,13 @@ border: 5px solid rgba(110,9,121,1);
 border-radius: 50px;
 }
 
+#listFriend{
+  max-height: 400px;
+  overflow: auto;
+}
+
 .friendlist-div {
+  height: 100px;
   display: flex;
   margin: 20px 300px;
   border: 1px solid gray;
@@ -204,6 +219,13 @@ border-radius: 50px;
   width: 400px;
 }
 
+.addFriendBtn {
+  color: white;
+  background-color: green;
+  border: 7px solid green;
+  border-radius: 30px;
+}
+
 .deleteFriendBtn{
   float: right;
   border: 7px solid red;
@@ -212,13 +234,81 @@ border-radius: 50px;
   color: white;
 }
 
+/* CREATE A CHAT CSS */
+.createChatTitle {
+text-align: center;
+margin: 30px 0px;
+}
 
+.createChatP {
+  font-family: monospace;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.enterLobbiesBtn {
+  text-decoration: none;
+text-align: right;
+margin-right: 50px;
+margin-bottom: 20px;
+margin-top: 30px;
+}
+
+.enterLobbiesBtn a {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  background-color: rgba(110,9,121,1);
+  border: 10px solid rgba(110,9,121,1);
+  border-radius: 10px;
+}
+
+.enterLobbiesBtn a:hover {
+  color: white;
+  background-color: rgb(154, 10, 170);
+  border: 10px solid rgb(154, 10, 170);
+  text-decoration: none;
+}
+
+.enterLobbiesBtn:hover i{
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+
+}
+
+.right {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.createChatRoom label{
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+}
 
 /* LOBBY CSS */
 .lobbyContainer{
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 560px;
+  padding-top: 150px;
+  overflow: auto;
+
+  /* border-image: linear-gradient(to right, rgba(4,31,107, 1) 50%,rgba(54, 1, 35, 1) 10%,  rgba(110,9,121,1) 39%);
+  border-width: 3px;
+  border-style: solid;
+
+  border-image-slice: 1; */
 }
 .card {
   border-radius: 50px;
@@ -305,6 +395,91 @@ margin: 30px 0px;
 }
 
 
+/* FIND USER AND ADD USER CSS */
+.searchUserContainer {
+  margin-top: 100px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-image: linear-gradient(to right, rgba(4,31,107, 1) 50%,rgba(54, 1, 35, 1) 10%,  rgba(110,9,121,1) 39%);
+    border-width: 3px;
+    border-style: solid;
+
+    border-image-slice: 1;
+  height: 300px;
+}
+
+.searchUserForm {
+  margin: 50px 350px;
+}
+
+.searchUserForm label{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.searchUserBtn {
+  color: white;
+  border: 5px solid rgba(110,9,121,1);
+  border-radius: 25px;
+  background-color: rgba(110,9,121,1);
+  margin-left: 20px;
+}
+
+.searchUserBtn:hover{
+  color: white;
+  border: 5px solid rgb(125, 10, 138);
+  border-radius: 25px;
+  background-color: rgb(125, 10, 138);
+  margin-left: 20px;
+}
+
+.searchGoBack{
+  margin-top: 50px;
+margin-left: 50px;
+}
+
+ .searchGoBack a{
+   font-size: 20px;
+  background-color: rgba(4,31,107, 1);
+  border: 10px solid rgba(4,31,107, 1);
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+}
+
+.searchGoBack a:hover{
+  font-size: 20px;
+ background-color: rgb(5, 39, 134);
+ border: 10px solid rgb(5, 39, 134);
+ border-radius: 25px;
+ text-decoration: none;
+ color: white;
+}
+
+.searchGoBack:hover i{
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+
+}
+
+.left {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+
+
+
+/* RESPONSIVE CSSS */
+
 @media only screen and (max-width: 991px) {
   .show{
     display: inline-block;
@@ -387,4 +562,27 @@ margin: 30px 0px;
   color: white;
 }
 
+.addFriendBtn {
+  font-size: 10px;
+  float: right;
+  color: white;
+  width: 100px;
+  background-color: green;
+  border: 3px solid green;
+  border-radius: 30px;
+}
+
+}
+
+@media only screen and (max-width: 500px) {
+  .lobbyContainer {
+      max-height: none;
+  }
+
+  .searchUserForm {
+    margin: 50px 20px;
+  }
+  #listFriend{
+    overflow: auto;
+  }
 }

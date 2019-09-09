@@ -1,3 +1,6 @@
+
+
+
 var baseLogFunction = console.log;
 console.log = function () {
     baseLogFunction.apply(console, arguments);
@@ -12,13 +15,17 @@ console.log = function () {
 
 function createLogNode(message) {
     var node = document.createElement("div");
-    node.setAttribute('id', 'ouput')
+    node.setAttribute('id', 'ouput');
+    
+
     var textNode = document.createTextNode(message);
     node.appendChild(textNode);
     return node;
 }
 
 window.onerror = function (message, url, linenumber) {
+    var compiler = document.getElementById('compilerText');
+    compiler.style.color = "red";
     console.log("JavaScript error: " + message + " on line " +
         linenumber + " for " + url);
 }
@@ -34,8 +41,10 @@ function compile() {
 
     compiler.innerHTML = "";
     let theFunction = new Function(js.value);
-
+    compiler.style.color = "green";
 
     compiler.append(theFunction());
+
+
 }
 
