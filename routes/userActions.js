@@ -43,7 +43,7 @@ router.get('/userChats/edit/:id', (req, res, next) => {
         .then(lobby => {
             User.findOne({ username: lobby.creator })
                 .then(user => {
-                    User.getFriends(user, function (err, friendship) {
+                    User.getAcceptedFriends(user, function (err, friendship) {
                         res.render("Chat/userChats/editRoom", {
                             friendship,
                             lobby
@@ -54,6 +54,20 @@ router.get('/userChats/edit/:id', (req, res, next) => {
         })
         .catch(err => next(err))
 })
+
+
+
+router.post('/removeFriendChat/:name', (req, res, next) => {
+    // console.log(req.params.name)
+    Lobby.findOneAndUpdate({ friends: { $in: req.params.name } }, {
+        $pull: {
+            friends: req.params.name
+        }
+    }).then(res.redirect('back'))
+        .catch(err => next(err))
+})
+
+
 
 // "/chatroom/{{lobby._id}}/edited"
 
