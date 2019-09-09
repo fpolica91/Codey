@@ -58,6 +58,16 @@ let theUser = $('.theUser').html();
 
 
 
+
+
+
+
+
+
+
+
+
+
 (function () {
     $('#js').change(() => {
         let textarea = $('#js')
@@ -112,7 +122,7 @@ function formatTime(dateStr) {
     let theDay = dateStr.getDate();
     let theHours = dateStr.getHours();
     let theMinutes = dateStr.getMinutes();
-    if(theHours > 12){
+    if (theHours > 12) {
         theHours -= 12;
         return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " PM";
     } else if (theHours === 0) {

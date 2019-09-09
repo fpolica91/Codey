@@ -1,0 +1,18 @@
+<form action="/chatroom/{{lobby._id}}/edited" method="POST">
+    <label for="name"> Enter Chatroom Name</label>
+    <input type="text" name="name" value="{{lobby.name}}">
+    <label for="topic">Specify Topic</label>
+    <input type="text" name="topic" value="{{lobby.topic}}">
+    {{#each friendship}}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <input type="checkbox" value="{{this.friend.username}}" name="friends">
+            <label class="username">
+                {{this.friend.username}}
+            </label>
+        </li>
+    </ul>
+    {{/each}}
+
+    <button>Submit Changes</button>
+</form>

@@ -7,7 +7,7 @@ let theFriendListTitle = document.getElementById('friendTitle');
 let theFriendList = document.getElementById('listFriend');
 
 
-friendButton.onclick = function(){
+friendButton.onclick = function () {
     axios.get('/friends')
     .then(response => {
         console.log(response.data)
@@ -42,12 +42,12 @@ friendButton.onclick = function(){
             theFriendList.append(listElement);
            // theFriendList.append(deleteForm);
 
+            })
         })
-    })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
 
-pendingButton.onclick = function(){
+pendingButton.onclick = function () {
     axios.get('/pending')
     .then(response => {
         console.log(response.data)
@@ -92,11 +92,12 @@ pendingButton.onclick = function(){
             listElement.append(declineForm);
             theFriendList.append(listElement);
         })
+
     })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
 
-requestButton.onclick = function(){
+requestButton.onclick = function () {
     axios.get('/requested')
     .then(response => {
         console.log(response.data)
@@ -120,5 +121,6 @@ requestButton.onclick = function(){
             theFriendList.append(listElement);
         })
     })
-    .catch(err => console.log("An error just happened ", err));
+        .catch(err => console.log("An error just happened ", err));
 }
+
