@@ -137,3 +137,14 @@ function formatTime(dateStr) {
     return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
 
 };
+
+let theRemoverUserChatBtn = document.getElementById('removeUserChatBtn');
+theRemoverUserChatBtn.onclick = function(){
+    let theChatHeader = document.getElementById('chatRoomHead');
+    let theMeta = document.createElement('meta');
+    theMeta.setAttribute('http-equiv', 'refresh');
+    theMeta.setAttribute('content', '1');
+    theMeta.setAttribute('url', '/userChats/{{lobby._id}}');
+    theChatHeader.append(theMeta);
+
+}
