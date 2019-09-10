@@ -9,7 +9,7 @@ let theUser = $('.theUser').html();
         e.preventDefault();
         let li = document.createElement("li");
         li.setAttribute('class', 'senderMsg');
-        socket.emit("chat message", $("#message").val(), theUser);
+        socket.emit("chat message", { msg: $("#message").val(), user: theUser });
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
@@ -21,7 +21,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
-        console.log(JSON.stringify(data))
+        console.log(JSON.stringify(data));
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
