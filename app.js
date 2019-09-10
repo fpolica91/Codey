@@ -1,3 +1,4 @@
+require("dotenv").config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -28,7 +29,7 @@ require('./config/passportcongif')
 mongoose.Promise = Promise;
 mongoose
   // .connect('mongodb://localhost/undefined', { useNewUrlParser: true })
-  .connect('mongodb://<dbuser>:<dbpassword>@ds015325.mlab.com:15325/heroku_6bsb26hh', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
