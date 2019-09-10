@@ -51,12 +51,13 @@
             {{else}}
 
             <ul class="chatUserList">
+                <li>{{currentUser}}</li>
                 {{#each lobby.friends}}
                 <li>{{this}}</li>
-                <ul class="listOfUserFriends">
+                {{!-- <ul class="listOfUserFriends"> --}}
 
-                </ul>
                 {{/each}}
+                {{!-- </ul> --}}
             </ul>
             {{/if}}
 
