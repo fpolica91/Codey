@@ -26,8 +26,8 @@ let theUser = $('.theUser').html();
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
         var messages = document.getElementById("messages");
-        messages.appendChild(li).append(data.message);
-        messages.appendChild(span).append("by " + data.sender + ": " + "just now");
+        messages.appendChild(li).append(data.msg);
+        messages.appendChild(span).append("by " + data.user + ": " + "just now");
     });
 })();
 
