@@ -86,6 +86,9 @@ router.post('/chatroom/:id/edited', (req, res, next) => {
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
+            if (lobby.friends.indexOf(req.user.username) < 0 && (lobby.creator !== req.user.username)) {
+                res.redirect('/');
+            }
             if (lobby.creator === req.user.username) {
                 res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username })
             } else {
