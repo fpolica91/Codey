@@ -8,9 +8,11 @@ const url = require('url')
 
 function socket(io) {
     let newCode;
-
+    (console.log("WATCH THIS"))
+  //  console.log(io); *
     io.on('connection', function (socket) {
-        // console.log(socket); THIS PRINTS THE WHOLE SOCKET
+      //  console.log("LOOK AFTER THIS"); *
+        console.log(); //THIS PRINTS THE WHOLE SOCKET
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
@@ -19,21 +21,23 @@ function socket(io) {
         //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
 
-        socket.on('chat message', function (msg, user) {
+        socket.on('chat message', function (msg) {
+            console.log("THE USER WAS")
+            console.log(msg);
             socket.join(`${realUrl}`)
-            console.log("the user was " + user);
-            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg, theuser: user});
+            // socket.on('setUser', function(theuser){
+            // console.log("THE USER WAS " + theuser);
+            // })
+            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg.msg, sender: msg.sender});
             let chat = new Room({
-                message: msg,
-                sender: user
-            }
-
-            )
-            chat.save(function (err) {
-                if (err) {
-                    return handleError(err)
-                }
+                message: msg.msg,
+                sender: msg.sender
             })
+            chat.save().
+            then(theChat => {
+                console.log("Successfully saved ", theChat);
+            })
+            .catch((err) => console.log("An error happened while saving message, ", err));
 
             Lobby.findByIdAndUpdate(`${realUrl}`, {
                 $push: {

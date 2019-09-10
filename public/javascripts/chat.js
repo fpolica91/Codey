@@ -5,11 +5,13 @@ let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
+        console.log("THE USER IS " + theUser)
+        console.log(socket);
         socket.emit("connection", id);
         e.preventDefault();
         let li = document.createElement("li");
         li.setAttribute('class', 'senderMsg');
-        socket.emit("chat message", { msg: $("#message").val(), user: theUser });
+        socket.emit("chat message", { msg: $("#message").val(), sender: theUser});
         messages.appendChild(li).append($("#message").val());
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
@@ -27,7 +29,7 @@ let theUser = $('.theUser').html();
         li.setAttribute('class', 'receiverMsg');
         var messages = document.getElementById("messages");
         messages.appendChild(li).append(data.message);
-        messages.appendChild(span).append("by " + data.theuser + ": " + "just now");
+        messages.appendChild(span).append("by " + data.sender + ": " + "just now");
     });
 })();
 
