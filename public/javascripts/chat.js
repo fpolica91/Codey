@@ -5,8 +5,6 @@ let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
-        console.log("THE USER IS " + theUser)
-        console.log(socket);
         socket.emit("connection", id);
         e.preventDefault();
         let li = document.createElement("li");
@@ -23,7 +21,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
