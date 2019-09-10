@@ -21,6 +21,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
+        console.log(data);
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
