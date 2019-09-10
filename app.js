@@ -147,5 +147,12 @@ hbs.registerHelper('if_eq', function (a, b, opts) {
   }
 });
 
+hbs.registerHelper('if_index', function (a, b, opts) {
+  if (a.indexOf(b)  < 0) {
+    return opts.fn(this);
+  } else {
+    return opts.inverse(this);
+  }
+});
 
 module.exports = app;
