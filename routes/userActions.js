@@ -95,7 +95,7 @@ router.get('/userChats/:id', (req, res, next) => {
              
                 res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username})
             } else {
-                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false})
+                res.render("Chat/userChats/userRoom2", { lobby: lobby, layout: false})
             }
         })
         .catch(err => console.log("Errr while getting the chat ", err));
