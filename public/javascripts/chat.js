@@ -18,7 +18,7 @@ let theUser = $('.theUser').html();
 
         return false;
     })
-
+});
 
     socket.on("received", (data) => {
         console.log(JSON.stringify(data))
@@ -28,7 +28,7 @@ let theUser = $('.theUser').html();
         var messages = document.getElementById("messages");
         messages.appendChild(li).append(data.message);
         messages.appendChild(span).append("by " + data.sender + ": " + "just now");
-    });
+    
 })();
 
 (async function () {
