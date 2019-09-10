@@ -8,11 +8,9 @@ const url = require('url')
 
 function socket(io) {
     let newCode;
-    (console.log("WATCH THIS"))
-  //  console.log(io); *
+
     io.on('connection', function (socket) {
-      //  console.log("LOOK AFTER THIS"); *
-        console.log(); //THIS PRINTS THE WHOLE SOCKET
+        console.log(socket.id); //THIS PRINTS THE WHOLE SOCKET
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
@@ -20,14 +18,11 @@ function socket(io) {
         let hUrl = trueUrl.pathname.split('/');
         //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
-
+        socket.join(`${realUrl}`)
         socket.on('chat message', function (msg) {
-          //  console.log("THE USER WAS")
-          //  console.log(msg);
-            socket.join(`${realUrl}`)
-            // socket.on('setUser', function(theuser){
-            // console.log("THE USER WAS " + theuser);
-            // })
+       
+           
+        
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg.msg, sender: msg.sender});
             let chat = new Room({
                 message: msg.msg,

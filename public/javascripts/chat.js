@@ -4,6 +4,8 @@ var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
 
 (function () {
+    // let myData = {name: theUser, userId: socket.id};
+    //console.log(JSON.stringify(myData));
     $("#sendForm").submit(function (e) {
         socket.emit("connection", id);
         e.preventDefault();
