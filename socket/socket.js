@@ -19,13 +19,13 @@ function socket(io) {
         //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
 
-        socket.on('chat message', function (msg, theUser) {
+        socket.on('chat message', function (msg, user) {
             socket.join(`${realUrl}`)
-            console.log("the user was " + theUser);
+            console.log("the user was " + user);
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg });
             let chat = new Room({
                 message: msg,
-                sender: theUser
+                sender: user
             }
 
             )
