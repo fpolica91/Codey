@@ -38,11 +38,11 @@
         <li>{{lobby.creator}}</li>
         {{#each lobby.friends}}
 <li>{{this}}</li>
-{{#eq lobby.creator {{currentUser.username}} }}
+{{#if lobbyCreator}}
 <form action="/removeFriendChat/{{this}}" method="POST">
                     <button id="removeUserChatBtn">Delete</button>
                 </form>
-     {{/eq}}
+     {{/if}}
         {{/each}}
            </ul>
     </div>

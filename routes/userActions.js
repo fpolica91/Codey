@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Lobby = require('../models/Lobby')
 const User = require('../models/User')
+const hbs = require('hbs');
 
 
 router.use((req, res, next) => {
