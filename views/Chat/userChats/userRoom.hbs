@@ -36,7 +36,9 @@
 
         <div class="ListUsers">
             Users:
+
             {{#if user }}
+            <li>{{user}}</li>
             <ul class="chatUserList">
                 {{#each lobby.friends}}
                 <li>{{this}}</li>
@@ -51,7 +53,7 @@
             {{else}}
 
             <ul class="chatUserList">
-                <li>{{currentUser}}</li>
+
                 {{#each lobby.friends}}
                 <li>{{this}}</li>
                 {{!-- <ul class="listOfUserFriends"> --}}
