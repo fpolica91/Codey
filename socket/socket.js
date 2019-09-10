@@ -22,10 +22,10 @@ function socket(io) {
         socket.on('chat message', function (msg, theUser) {
             socket.join(`${realUrl}`)
             console.log(theUser);
-            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg });
+            socket.broadcast.to(`${realUrl}`).emit("received", { message: msg, user: theUser});
             let chat = new Room({
                 message: msg,
-                sender: theUser
+                sender: user
             }
 
             )
