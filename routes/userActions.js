@@ -92,10 +92,10 @@ router.get('/userChats/:id', (req, res, next) => {
                     "isAlive" : false,
                     "emergencyContacts" : [999999999,888888888,777777777]
              };
-             var returnVals= JSON.stringify(data);
+             
                 res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username})
             } else {
-                res.render("Chat/userChats/userRoom2", { lobby: lobby, layout: false})
+                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false})
             }
         })
         .catch(err => console.log("Errr while getting the chat ", err));
