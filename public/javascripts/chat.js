@@ -3,7 +3,7 @@ let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
 
-(async function () {
+(function () {
     $("#sendForm").submit(function (e) {
         socket.emit("connection", id);
         e.preventDefault();
@@ -20,7 +20,7 @@ let theUser = $('.theUser').html();
     })
 
 
-  await  socket.on("received", (data) => {
+    socket.on("received", (data) => {
         console.log(JSON.stringify(data))
         let li = document.createElement("li");
         let span = document.createElement("span");
