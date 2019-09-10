@@ -22,8 +22,8 @@ function socket(io) {
         let realUrl = hUrl[2];
 
         socket.on('chat message', function (msg) {
-            console.log("THE USER WAS")
-            console.log(msg);
+          //  console.log("THE USER WAS")
+          //  console.log(msg);
             socket.join(`${realUrl}`)
             // socket.on('setUser', function(theuser){
             // console.log("THE USER WAS " + theuser);
