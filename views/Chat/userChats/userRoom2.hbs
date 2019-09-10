@@ -38,10 +38,6 @@
         <li>{{lobby.creator}}</li>
         {{#each lobby.friends}}
 <li>{{this}}</li>
-<form style="visibility:{{property.mode}}" action="/removeFriendChat/{{this}}" method="POST">
-                    <button id="removeUserChatBtn">Delete</button>
-                </form>
-
         {{/each}}
            </ul>
     </div>
