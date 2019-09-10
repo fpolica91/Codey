@@ -33,17 +33,30 @@
 
 <div class="chatCodeRoom">
     <div class="ListUsers">
-        Users:
-        <ul>
-        <li>{{lobby.creator}}</li>
-        {{#each lobby.friends}}
-<li>{{this}}</li>
-<form style="visibility:{{property.mode}}" action="/removeFriendChat/{{this}}" method="POST">
-                    <button id="removeUserChatBtn">Delete</button>
+         Users:
+            {{#if user }}
+            <ul class="chatUserList">
+                {{#each lobby.friends}}
+                <li>{{this}}</li>
+                <form action="/removeFriendChat/{{this}}" method="POST">
+                    <button class="removeBtn" value="{{this}}">Delete</button>
                 </form>
-
-        {{/each}}
-           </ul>
+                {{/each}}
+                <ul class="listOfUserFriends">
+​
+                </ul>
+            </ul>
+            {{else}}
+​
+            <ul class="chatUserList">
+                {{#each lobby.friends}}
+                <li>{{this}}</li>
+                <ul class="listOfUserFriends">
+​
+                </ul>
+                {{/each}}
+            </ul>
+            {{/if}}
     </div>
 
     <div class="window">
