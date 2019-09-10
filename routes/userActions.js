@@ -100,13 +100,15 @@ router.get('/userChats/:id', (req, res, next) => {
 
 
 router.post('/removeFriendChat/:name', (req, res, next) => {
-    console.log(req.params.name)
+
     Lobby.findOneAndUpdate({ friends: { $in: req.params.name } }, {
         $pull: {
             friends: req.params.name
         }
     }).then(res.redirect('back'))
         .catch(err => next(err))
+
+
 })
 
 

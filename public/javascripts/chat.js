@@ -21,6 +21,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
+        location.reload()
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
@@ -41,9 +42,9 @@ let theUser = $('.theUser').html();
                 //   console.log(data);
                 let li = document.createElement("li");
                 let span = document.createElement("span");
-                if(data.sender === theUser){
+                if (data.sender === theUser) {
                     li.setAttribute('class', 'senderMsg');
-                }else{
+                } else {
                     li.setAttribute('class', 'receiverMsg');
                 }
                 messages.appendChild(li).append(data.message);
