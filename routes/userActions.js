@@ -85,7 +85,7 @@ router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
             if (lobby.creator === req.user.username) {
-                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username })
+                res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false, user: req.user.username, lobbyCreator: lobby.creator})
             } else {
                 res.render("Chat/userChats/userRoom", { lobby: lobby, layout: false })
             }
