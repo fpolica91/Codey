@@ -78,6 +78,9 @@ socket.on('listOfUsers', function(data){
         }).catch(err => console.log("An error happened fetching ", err));
 })();
 
+socket.on('redirect', function(destination) {
+    window.location.href = destination;
+});
 //BUTTON TO DELETE
 // socket.on('setSocketId', function (data) {
 //     console.log(data)
@@ -164,7 +167,7 @@ function formatTime(dateStr) {
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         console.log(button[i].value)
-        socket.emit("kicked", button[i].name);
+        socket.emit("kicked", { theUserId: button[i].name});
     })
 }
 

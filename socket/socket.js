@@ -4,6 +4,7 @@ const Code = require('../models/Code')
 const Lobby = require('../models/Lobby')
 const User = require('../models/User')
 const url = require('url')
+var http = require("http");
 
 const users = {};
 
@@ -11,7 +12,7 @@ function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
-       console.log("YO WATCH THIS");
+       console.log("SERVER THIS");
        socket.on('set-user', function(data){
         users[socket.id] = data;
         console.log("HELLO WOLRD 2")
@@ -70,7 +71,11 @@ function socket(io) {
         socket.on("kicked", (data) => {
             console.log("YOU WERE KICKED");
             console.log(data);
-            socket.disconnect(data)
+            console.log("THE USER WAS");
+            console.log(io.sockets.connected[socket.id]);
+            io.sockets.connected[data].disconnect();
+            io.sockets.connected[data].emit('redirect', '/');
+            
                         // socket.leave(realUrl)
                  
                 })
@@ -82,7 +87,6 @@ function socket(io) {
             });
     })
 }
-
 
 
 //==========================WORKING VERSION=======================================
