@@ -52,7 +52,6 @@ function socket(io) {
             })
         })
         socket.on("kicked", (data) => {
-            // console.log(`the user was removed, bye ${data}`)
             socket.leave(realUrl)
         })
     })

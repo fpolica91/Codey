@@ -145,7 +145,6 @@ function formatTime(dateStr) {
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         location.reload()
-        console.log(button[i].value)
-        socket.emit("kicked", button[i].value)
+        socket.emit("kicked", location.reaload(), button[i].value)
     })
 }
