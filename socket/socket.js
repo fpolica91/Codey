@@ -5,12 +5,20 @@ const Lobby = require('../models/Lobby')
 const User = require('../models/User')
 const url = require('url')
 
+const users = {};
 
 function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
-        console.log(socket.id); //THIS PRINTS THE WHOLE SOCKET
+       console.log("YO WATCH THIS");
+       socket.on('set-user', function(data){
+        users[socket.id] = data;
+        console.log("HELLO WOLRD 2")
+        console.log(users);
+        socket.emit('setSocketId', {theId: socket.id});
+       })
+        //console.log(socket.client); //THIS PRINTS THE WHOLE SOCKET
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
@@ -19,6 +27,11 @@ function socket(io) {
         //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
         socket.join(`${realUrl}`)
+
+
+
+
+
         socket.on('chat message', function (msg) {
        
            
@@ -52,6 +65,21 @@ function socket(io) {
                 if (err) return handleError(err)
             })
         })
+
+        socket.on("kicked", (data) => {
+            console.log("YOU WERE KICKED");
+            
+            console.log(data);
+                        // socket.disconnect(data, true)
+                        // socket.leave(realUrl)
+                 
+                })
+
+        socket.on( 'disconnect', function() {
+            console.log("DISCONNECTED, " + users[socket.id]);
+            delete users[socket.id]
+            console.log(users);
+            });
     })
 }
 
