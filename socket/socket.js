@@ -9,8 +9,8 @@ const url = require('url')
 function socket(io) {
     let newCode;
 
-    io.on('connection', function (socket) {
-        console.log()
+    io.sockets.on('connection', function (socket) {
+
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
