@@ -78,9 +78,10 @@ socket.on('listOfUsers', function(data){
         }).catch(err => console.log("An error happened fetching ", err));
 })();
 
-socket.on('redirect', function(destination) {
-    window.location.href = destination;
-});
+//REDIRECT
+// socket.on('redirect', function(destination) {
+//     window.location.href = destination;
+// });
 //BUTTON TO DELETE
 // socket.on('setSocketId', function (data) {
 //     console.log(data)

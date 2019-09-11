@@ -74,7 +74,7 @@ function socket(io) {
             console.log("THE USER WAS");
             console.log(io.sockets.connected[socket.id]);
             io.sockets.connected[data].disconnect();
-            io.sockets.connected[data].emit('redirect', '/');
+            // io.sockets.connected[data].emit('redirect', '/');
             
                         // socket.leave(realUrl)
                  
