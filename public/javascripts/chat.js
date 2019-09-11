@@ -2,15 +2,15 @@ var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
-let theSocketAttach = $('.theActualSockey');
+// let theSocketAttach = $('.theActualSockey');
 let button = document.getElementsByClassName('removeBtn');
-let theSockedId = $('.theActualSockey').html();
+// let theSockedId = $('.theActualSockey').html();
 
 (function () {
     // let myData = {name: theUser, userId: socket.id};
     console.log("CLIENT SIDE");
     socket.emit('set-user', theUser);
-  
+
     $("#sendForm").submit(function (e) {
         // socket.emit("connection");
         e.preventDefault();
@@ -21,9 +21,22 @@ let theSockedId = $('.theActualSockey').html();
         let span = document.createElement("span");
         messages.appendChild(span).append("by " + theUser + ": " + "just now");
         $("#message").val("");
-
         return false;
     })
+
+    //DISPLAY ID
+socket.on('listOfUsers', function(data){
+    console.log("USERS: ");
+    console.log(data);
+    for(let key in data){
+        // console.log(key + ":" + data[key]);
+        for (let i = 0; i < button.length; i++) {
+            if (button[i].value === data[key]) {
+                button[i].setAttribute("name", key)
+            }
+        } 
+    }
+});
     // socket.on('setSocketId', function(data) {
     //     console.log(data);
     //     theSocketAttach.text(data.theId);
@@ -65,20 +78,103 @@ let theSockedId = $('.theActualSockey').html();
         }).catch(err => console.log("An error happened fetching ", err));
 })();
 
-
 //BUTTON TO DELETE
-socket.on('setSocketId', function (data) {
-    console.log("Here is the SET")
-    console.log(data)
-    for (let i = 0; i < button.length; i++) {
-        if (button[i].value === data.name) {
-            button[i].setAttribute("name", data.theId)
-        }
-    }
+// socket.on('setSocketId', function (data) {
+//     console.log(data)
+    // for (let i = 0; i < button.length; i++) {
+    //     if (button[i].value === data.name) {
+    //         button[i].setAttribute("name", data.theId)
+    //     }
+    // }
+// });
+// for (let i = 0; i < button.length; i++) {
+//     button[i].addEventListener("click", () => {
+//         e.preventDefault();
+//         console.log(button[i].value)
+//         socket.emit("kicked", { theUserId: theSockedId});
+//     })
+// }
+(function () {
+    $('#js').change(() => {
+        let textarea = $('#js')
+        let da = textarea.val()
+        textarea.html("")
+        // socket.emit('send-code', message)
+        axios.get('/code')
+            .then(response => {
+                da = response.data.code
+            })
+        socket.emit("send-code", da)
+    })
+    socket.on('code-message', data => {
+        code.value = data
+    });
+})();
+
+
+
+// fetching initial chat messages from the database
+
+//is typing...
+
+let messageInput = document.getElementById("message");
+let typing = document.getElementById("typing");
+
+//isTyping event
+messageInput.addEventListener("keypress", () => {
+    socket.emit("typing", { user: "Someone", message: "is typing..." });
 });
+
+socket.on("notifyTyping", data => {
+    typing.innerText = data.user + " " + data.message;
+    console.log(data.user + data.message);
+});
+
+//stop typing
+messageInput.addEventListener("keyup", () => {
+    socket.emit("stopTyping", "");
+});
+
+socket.on("notifyStopTyping", () => {
+    typing.innerText = '';
+});
+
+
+
+
+//FORMAT TIME
+function formatTime(dateStr) {
+    let monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+    let theMonth = dateStr.getMonth();
+    theMonth = monthArray[theMonth - 1]
+    let theDay = dateStr.getDate();
+    let theHours = dateStr.getHours();
+    let theMinutes = dateStr.getMinutes();
+    if (theHours > 12) {
+        theHours -= 12;
+        return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " PM";
+    } else if (theHours === 0) {
+        theHours = 12
+        return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
+    }
+    return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
+
+};
+
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         console.log(button[i].value)
         socket.emit("kicked", { theUserId: button[i].name});
     })
 }
+
+// let theRemoverUserChatBtn = document.getElementById('removeUserChatBtn');
+// theRemoverUserChatBtn.onclick = function(){
+//     let theChatHeader = document.getElementById('chatRoomHead');
+//     let theMeta = document.createElement('meta');
+//     theMeta.setAttribute('http-equiv', 'refresh');
+//     theMeta.setAttribute('content', '1');
+//     theMeta.setAttribute('url', '/userChats/{{lobby._id}}');
+//     theChatHeader.append(theMeta);
+
+// }
