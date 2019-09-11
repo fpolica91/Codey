@@ -29,10 +29,6 @@ let theSockedId = $('.theActualSockey').html();
     //     theSocketAttach.text(data.theId);
     // });
 
-    $('.removeBtn').click(()=> {
-console.log("IM WORKING");
-    })
-
     socket.on("received", (data) => {
         // console.log(JSON.stringify(data));
         let li = document.createElement("li");
@@ -79,10 +75,10 @@ socket.on('setSocketId', function (data) {
         }
     }
 });
-// for (let i = 0; i < button.length; i++) {
-//     button[i].addEventListener("click", () => {
-//         e.preventDefault();
-//         console.log(button[i].value)
-//         socket.emit("kicked", { theUserId: theSockedId});
-//     })
-// }
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", () => {
+        e.preventDefault();
+        console.log(button[i].value)
+        socket.emit("kicked", { theUserId: button[i].name});
+    })
+}
