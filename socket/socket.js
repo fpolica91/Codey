@@ -70,7 +70,7 @@ function socket(io) {
         socket.on("kicked", (data) => {
             console.log("YOU WERE KICKED");
             console.log(data);
-            socket.disconnect(data, true)
+            socket.disconnect(data)
                         // socket.leave(realUrl)
                  
                 })
