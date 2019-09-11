@@ -23,7 +23,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
-        location.reload()
+        // location.reload()
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
@@ -144,6 +144,7 @@ function formatTime(dateStr) {
 
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
+        location.reload()
         console.log(button[i].value)
         socket.emit("kicked", button[i].value)
     })
