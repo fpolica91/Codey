@@ -7,7 +7,7 @@ let theUser = $('.theUser').html();
 (function () {
     $("#sendForm").submit(function (e) {
         socket.emit("connection", id);
-        location.reload()
+
         e.preventDefault();
         let li = document.createElement("li");
         li.setAttribute('class', 'senderMsg');
@@ -23,8 +23,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
-        const btn = $('#removeBtn')
-
+        location.reload()
         let li = document.createElement("li");
         let span = document.createElement("span");
         li.setAttribute('class', 'receiverMsg');
