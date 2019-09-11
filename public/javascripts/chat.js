@@ -1,11 +1,13 @@
 var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
+let button = document.getElementsByClassName("removeBtn")
 let theUser = $('.theUser').html();
 
 (function () {
     $("#sendForm").submit(function (e) {
         socket.emit("connection", id);
+
         e.preventDefault();
         let li = document.createElement("li");
         li.setAttribute('class', 'senderMsg');
@@ -21,6 +23,7 @@ let theUser = $('.theUser').html();
 
 
     socket.on("received", (data) => {
+        const btn = $('#removeBtn')
         location.reload()
         let li = document.createElement("li");
         let span = document.createElement("span");
@@ -30,6 +33,8 @@ let theUser = $('.theUser').html();
         messages.appendChild(span).append("by " + data.sender + ": " + "just now");
     });
 })();
+
+
 
 (async function () {
     await fetch("/history")
@@ -55,7 +60,6 @@ let theUser = $('.theUser').html();
             })
         }).catch(err => console.log("An error happened fetching ", err));
 })();
-
 
 
 
@@ -138,3 +142,10 @@ function formatTime(dateStr) {
     return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
 
 };
+
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", () => {
+        console.log(button[i].value)
+        socket.emit("kicked", button[i].value)
+    })
+}

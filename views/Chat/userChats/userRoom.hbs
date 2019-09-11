@@ -43,7 +43,7 @@
                 {{#each lobby.friends}}
                 <li>{{this}}</li>
                 <form action="/removeFriendChat/{{this}}" method="POST">
-                    <button onclick="window.loaation.reload()">Delete</button>
+                    <button class="removeBtn" value="{{this}}">Delete</button>
                 </form>
                 {{/each}}
                 <ul class="listOfUserFriends">

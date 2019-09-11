@@ -10,7 +10,7 @@ function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
-
+        console.log()
         let theUrl = socket.handshake.headers.referer;
         // console.log(theUrl);
         var trueUrl = url.parse(theUrl, true);
@@ -18,11 +18,8 @@ function socket(io) {
         let hUrl = trueUrl.pathname.split('/');
         //  console.log(hUrl[2]);
         let realUrl = hUrl[2];
-
+        socket.join(`${realUrl}`)
         socket.on('chat message', function (msg, theUser) {
-            socket.join(`${realUrl}`)
-
-
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg });
             let chat = new Room({
                 message: msg,
@@ -53,6 +50,10 @@ function socket(io) {
             newCode.save((err) => {
                 if (err) return handleError(err)
             })
+        })
+        socket.on("kicked", (data) => {
+            // console.log(`the user was removed, bye ${data}`)
+            socket.leave(realUrl)
         })
     })
 }
