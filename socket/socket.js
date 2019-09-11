@@ -16,7 +16,7 @@ function socket(io) {
         users[socket.id] = data;
         console.log("HELLO WOLRD 2")
         console.log(users);
-        socket.emit('setSocketId', {theId: socket.id});
+        socket.emit('setSocketId', {theId: socket.id, name: data});
        })
         //console.log(socket.client); //THIS PRINTS THE WHOLE SOCKET
         let theUrl = socket.handshake.headers.referer;

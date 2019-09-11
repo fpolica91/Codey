@@ -68,6 +68,7 @@ let theSockedId = $('.theActualSockey').html();
 
 //BUTTON TO DELETE
 socket.on('setSocketId', function (data) {
+    console.log("Here is the SET")
     console.log(data)
     for (let i = 0; i < button.length; i++) {
         if (button[i].value === data.name) {
@@ -77,7 +78,6 @@ socket.on('setSocketId', function (data) {
 });
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
-        e.preventDefault();
         console.log(button[i].value)
         socket.emit("kicked", { theUserId: button[i].name});
     })

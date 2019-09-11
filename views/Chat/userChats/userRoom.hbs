@@ -35,8 +35,8 @@
     <div class="ListUsers">
          Users:
          <li>{{user}}</li>
-         <form action="/removeFriendChat/{{this}}" method="POST">
-                    <button class="removeBtn" value="{{this}}">Delete</button>
+         <form action="/removeFriendChat/{{user}}" method="POST">
+                    <button class="removeBtn" value="{{user}}">Delete</button>
                 </form>
             {{#if user }}
             <ul class="chatUserList">
