@@ -5,6 +5,8 @@ let theUser = $('.theUser').html();
 // let theSocketAttach = $('.theActualSockey');
 let button = document.getElementsByClassName('removeBtn');
 // let theSockedId = $('.theActualSockey').html();
+let theFriendinlist = document.getElementsByClassName('liTheFriend');
+
 
 (function () {
     // let myData = {name: theUser, userId: socket.id};
@@ -175,14 +177,18 @@ socket.on('exitChat', function(data){
     window.location.href = data;
 });
 
-socket.on('reloadChat', function(){
-    window.location.href;
+socket.on('removeBtn', function(data){
+    for (let i = 0; i < theFriendinlist.length; i++) {
+        if(theFriendinlist[i].innerHTML === data){
+            theFriendinlist[i].innerHTML = "";
+        }
+        }
 });
 
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         console.log(button[i].value);
-        socket.emit("kicked", button[i].name);
+        socket.emit("kicked", {user: button[i].name, value:button[i].value});
     })
 }
 

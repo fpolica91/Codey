@@ -71,8 +71,8 @@ function socket(io) {
         })
 
         socket.on("kicked", (data) => {
-            if (data == undefined || !data){
-                socket.emit('reloadChat');
+            if (data.user == undefined || !data.user){
+                socket.emit('removeBtn', data.value);
                 // return 
             } else{
                 console.log("YOU WERE KICKED");
