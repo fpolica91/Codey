@@ -29,10 +29,11 @@ function socket(io) {
         console.log(users);
         // socket.emit('setSocketId', {theId: socket.id, name: data});
         // socket.emit('listOfUsers', users)
+        socket.join(`${realUrl}`)
         io.in(`${realUrl}`).emit('listOfUsers', users);
        })
        
-        socket.join(`${realUrl}`)
+      
 
 
 
