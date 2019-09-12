@@ -9,6 +9,14 @@ let button = document.getElementsByClassName('removeBtn');
 (function () {
     // let myData = {name: theUser, userId: socket.id};
     console.log("CLIENT SIDE");
+
+//TESTING THE ROOM
+socket.on('sendRoom', function(data){
+    console.log(data.theRoom);
+})
+
+
+
     socket.emit('set-user', theUser);
 
     $("#sendForm").submit(function (e) {
@@ -164,6 +172,9 @@ function formatTime(dateStr) {
     return theMonth + ", " + theDay + " " + theHours + ":" + theMinutes + " AM";
 
 };
+
+
+
 
 socket.on('exitChat', function(data){
     window.location.href = data;

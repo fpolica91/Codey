@@ -27,16 +27,14 @@ function socket(io) {
         users[socket.id] = data;
         console.log("HELLO WOLRD 2")
         console.log(users);
+        socket.join(`${realUrl}`)
+      //  console.log(socket.adapter.rooms);
+        socket.emit('sendRoom', {theRoom: socket.adapter.rooms})
         // socket.emit('setSocketId', {theId: socket.id, name: data});
         socket.emit('listOfUsers', users)
         
        })
        
-        socket.join(`${realUrl}`)
-
-
-
-
 
         socket.on('chat message', function (msg) {
        
@@ -80,9 +78,7 @@ function socket(io) {
                 console.log(data);
                 console.log("THE USER WAS");
                 console.log(io.sockets.connected[socket.id]);
-                // io.sockets.connected[data].emit('exitChat', '/allChats'); WORKING
-               // io.to(sockets.connected[data]).emit('exitChat', '/allChats');
-               io.to(io.sockets.connected[data]).to(realurl).emit('exitchat', '/allchats');
+                io.sockets.connected[data].emit('exitChat', '/allChats'); WORKING
             }
        
                 })
