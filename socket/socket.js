@@ -80,9 +80,9 @@ function socket(io) {
                 console.log(data);
                 console.log("THE USER WAS");
                 console.log(io.sockets.connected[socket.id]);
-                // io.sockets.connected[data].emit('exitChat', '/allChats'); 
+                // io.sockets.connected[data].emit('exitChat', '/allChats'); WORKING
                // io.to(sockets.connected[data]).emit('exitChat', '/allChats');
-               io.sockets.connected[data].to(realurl).emit('exitchat', '/allchats');
+               io.to(io.sockets.connected[data]).to(`${realurl}`).emit('exitchat', '/allchats');
             }
        
                 })
