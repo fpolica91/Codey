@@ -73,7 +73,7 @@ function socket(io) {
             console.log(data);
             console.log("THE USER WAS");
             console.log(io.sockets.connected[socket.id]);
-            // io.sockets.connected[data].emit('exitChat', 'http://teamtreehouse.com');
+            io.sockets.connected[data].emit('exitChat', '/lobby');
             io.sockets.connected[data].disconnect(true).leave(realUrl);
            
             
