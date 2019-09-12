@@ -1,4 +1,9 @@
-var socket = io()
+var myUrl = window.location.href;
+console.log(myUrl);
+let theUrl = myUrl.split('/');
+// console.log(theUrl[4]);
+
+var socket = io(`${theUrl[4]}`)
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
 let theUser = $('.theUser').html();
@@ -6,10 +11,6 @@ let theUser = $('.theUser').html();
 let button = document.getElementsByClassName('removeBtn');
 // let theSockedId = $('.theActualSockey').html();
 
-var myUrl = window.location.href;
-console.log(myUrl);
-let theUrl = myUrl.split('/');
-console.log(theUrl[4]);
 
 (function () {
     // let myData = {name: theUser, userId: socket.id};
