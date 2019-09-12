@@ -6,6 +6,11 @@ let theUser = $('.theUser').html();
 let button = document.getElementsByClassName('removeBtn');
 // let theSockedId = $('.theActualSockey').html();
 
+var myUrl = window.location.href;
+console.log(myUrl);
+let theUrl = myUrl.split('/');
+console.log(theUrl);
+
 (function () {
     // let myData = {name: theUser, userId: socket.id};
     console.log("CLIENT SIDE");
