@@ -12,7 +12,7 @@ function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
-
+       // console.log(socket);
          //console.log(socket.client); //THIS PRINTS THE WHOLE SOCKET
          let theUrl = socket.handshake.headers.referer;
          // console.log(theUrl);
