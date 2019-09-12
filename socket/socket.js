@@ -69,6 +69,8 @@ function socket(io) {
         })
 
         socket.on("kicked", (data) => {
+            if (data == undefined || !data) return 
+            
             console.log("YOU WERE KICKED");
             console.log(data);
             console.log("THE USER WAS");
