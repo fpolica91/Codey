@@ -1,6 +1,7 @@
 var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
+let button = document.getElementsByClassName("removeBtn")
 let theUser = $('.theUser').html();
 // let theSocketAttach = $('.theActualSockey');
 let button = document.getElementsByClassName('removeBtn');
@@ -54,6 +55,8 @@ socket.on('listOfUsers', function(data){
     });
 })();
 
+
+
 (async function () {
     await fetch("/history")
         .then(data => {
@@ -65,9 +68,9 @@ socket.on('listOfUsers', function(data){
                 //   console.log(data);
                 let li = document.createElement("li");
                 let span = document.createElement("span");
-                if(data.sender === theUser){
+                if (data.sender === theUser) {
                     li.setAttribute('class', 'senderMsg');
-                }else{
+                } else {
                     li.setAttribute('class', 'receiverMsg');
                 }
                 messages.appendChild(li).append(data.message);
@@ -166,6 +169,7 @@ function formatTime(dateStr) {
 
 };
 
+<<<<<<< HEAD
 
 
 
@@ -190,3 +194,11 @@ for (let i = 0; i < button.length; i++) {
 //     theChatHeader.append(theMeta);
 
 // }
+=======
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", () => {
+        location.reload()
+        socket.emit("kicked", location.reaload(), button[i].value)
+    })
+}
+>>>>>>> 7daad09618f756f4d6503a01d5beb512defb035a

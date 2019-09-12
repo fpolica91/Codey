@@ -80,7 +80,9 @@ router.post('/removeFriendChat/:name', (req, res, next) => {
         $pull: {
             friends: req.params.name
         }
-    }).then(res.redirect('back'))
+    })
+    next()
+        // .then(res.redirect('back'))
         .catch(err => next(err))
 })
 
@@ -101,6 +103,9 @@ router.post('/chatroom/:id/edited', (req, res, next) => {
 router.get('/userChats/:id', (req, res, next) => {
     Lobby.findById(req.params.id)
         .then(lobby => {
+            if (lobby.friends.indexOf(req.user.username) < 0 && (lobby.creator !== req.user.username)) {
+                res.redirect('/');
+            }
             if (lobby.creator === req.user.username) {
     
              
@@ -114,13 +119,15 @@ router.get('/userChats/:id', (req, res, next) => {
 
 
 router.post('/removeFriendChat/:name', (req, res, next) => {
-    console.log(req.params.name)
+
     Lobby.findOneAndUpdate({ friends: { $in: req.params.name } }, {
         $pull: {
             friends: req.params.name
         }
     }).then(res.redirect('back'))
         .catch(err => next(err))
+
+
 })
 
 
