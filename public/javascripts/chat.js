@@ -9,7 +9,7 @@ let button = document.getElementsByClassName('removeBtn');
 var myUrl = window.location.href;
 console.log(myUrl);
 let theUrl = myUrl.split('/');
-console.log(theUrl);
+console.log(theUrl[4]);
 
 (function () {
     // let myData = {name: theUser, userId: socket.id};
