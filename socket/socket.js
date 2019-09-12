@@ -30,6 +30,7 @@ function socket(io) {
         socket.join(`${realUrl}`)
       //  console.log(socket.adapter.rooms);
         socket.emit('sendRoom', {theRoom: socket.adapter.rooms})
+        socket.emit('actualRoom', {actualRoom: io.sockets});
         // socket.emit('setSocketId', {theId: socket.id, name: data});
         socket.emit('listOfUsers', users)
         

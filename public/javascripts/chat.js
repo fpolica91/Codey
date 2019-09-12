@@ -15,7 +15,11 @@ socket.on('sendRoom', function(data){
     console.log(data.theRoom);
 })
 
-
+//SHOW ACTUAL ROOM
+socket.on('actualRoom', function(data) {
+    console.log("THE ACTUAL ROOM IS");
+    console.log(data.actualRoom);
+});
 
     socket.emit('set-user', theUser);
 
