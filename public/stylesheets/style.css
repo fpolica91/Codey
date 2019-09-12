@@ -298,11 +298,10 @@ margin-top: 30px;
 /* LOBBY CSS */
 .lobbyContainer{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: 560px;
-  padding-top: 150px;
-  overflow: auto;
+  min-height: 0px;
 
   /* border-image: linear-gradient(to right, rgba(4,31,107, 1) 50%,rgba(54, 1, 35, 1) 10%,  rgba(110,9,121,1) 39%);
   border-width: 3px;

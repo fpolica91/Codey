@@ -27,10 +27,11 @@ function socket(io) {
         users[socket.id] = data;
         console.log("HELLO WOLRD 2")
         console.log(users);
-        socket.join(`${realUrl}`)
-      //  console.log(socket.adapter.rooms);
-        socket.emit('sendRoom', {theRoom: socket.adapter.rooms})
-        socket.emit('actualRoom', {actualRoom: io.sockets});
+        socket.join(realUrl, function (){
+            console.log(socket.id + " now in rooms ", socket.rooms);
+
+        })
+    
         // socket.emit('setSocketId', {theId: socket.id, name: data});
         socket.emit('listOfUsers', users)
         
@@ -39,8 +40,6 @@ function socket(io) {
 
         socket.on('chat message', function (msg) {
        
-           
-        
             socket.broadcast.to(`${realUrl}`).emit("received", { message: msg.msg, sender: msg.sender});
             let chat = new Room({
                 message: msg.msg,
@@ -73,7 +72,8 @@ function socket(io) {
 
         socket.on("kicked", (data) => {
             if (data == undefined || !data){
-                return 
+                socket.emit('exitChat', `/userChats/${realUrl}`)
+                // return 
             } else{
                 console.log("YOU WERE KICKED");
                 console.log(data);

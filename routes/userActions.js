@@ -25,30 +25,31 @@ router.post('/create/chat', (req, res, next) => {
     })
 })
 
-// router.get('/allchats', (req, res, next) => {
-//     Lobby.find({ $or: [{ friends: { $in: req.user.username } }, { creator: { $eq: req.user.username } } ] })
-//         .then(lobby => {
-//             let userLobbies = lobby.map(lobbie => {
-//                 return lobbie;
-//             })
-//             if (userLobbies.creator === req.user.username) {
-//                 res.render('userviews/userlist', { userLobbies, creator: userLobbies.creator })
-//             } else {
-//                 res.render('userviews/userlist', { userLobbies })
-//             }
-// ​
-//         }).catch(err => next(err))
-// })
-
 router.get('/allchats', (req, res, next) => {
-    Lobby.find({ $or: [{ friends: { $in: req.user.username } }, { creator: { $eq: req.user.username } }] })
+    Lobby.find({ friends: { $in: req.user.username } })
         .then(lobby => {
             let userLobbies = lobby.map(lobbie => {
                 return lobbie;
             })
-            res.render('userviews/userlist', { userLobbies })
+    Lobby.find({ creator: { $eq: req.user.username } })
+    .then(creatorLobby => {
+        let creatorLobbies = creatorLobby.map(theLobbies => {
+            return theLobbies;
+        })
+        res.render('userviews/userlist', { friendRooms: userLobbies, creatorRooms: creatorLobbies})
+    })
         }).catch(err => next(err))
 })
+
+// router.get('/allchats', (req, res, next) => {
+//     Lobby.find({ $or: [{ friends: { $in: req.user.username } }, { creator: { $eq: req.user.username } }] })
+//         .then(lobby => {
+//             let userLobbies = lobby.map(lobbie => {
+//                 return lobbie;
+//             })
+//             res.render('userviews/userlist', { userLobbies })
+//         }).catch(err => next(err))
+// })
 
 
 

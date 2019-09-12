@@ -10,17 +10,6 @@ let button = document.getElementsByClassName('removeBtn');
     // let myData = {name: theUser, userId: socket.id};
     console.log("CLIENT SIDE");
 
-//TESTING THE ROOM
-socket.on('sendRoom', function(data){
-    console.log(data.theRoom);
-})
-
-//SHOW ACTUAL ROOM
-socket.on('actualRoom', function(data) {
-    console.log("THE ACTUAL ROOM IS");
-    console.log(data.actualRoom);
-});
-
     socket.emit('set-user', theUser);
 
     $("#sendForm").submit(function (e) {
@@ -186,7 +175,7 @@ socket.on('exitChat', function(data){
 
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
-        console.log(button[i].value)
+        console.log(button[i].value);
         socket.emit("kicked", button[i].name);
     })
 }
