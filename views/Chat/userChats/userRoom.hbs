@@ -34,10 +34,7 @@
 <div class="chatCodeRoom">
     <div class="ListUsers">
          Users:
-         <li>{{user}}</li>
-         <form action="/removeFriendChat/{{user}}" method="POST">
-                    <button class="removeBtn" value="{{user}}">Delete</button>
-                </form>
+         <li>{{lobby.creator}}</li>
             {{#if user }}
             <ul class="chatUserList">
                 {{#each lobby.friends}}
