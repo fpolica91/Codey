@@ -1,7 +1,6 @@
 var socket = io()
 let id = $('.chatroomID').html()
 var messages = document.getElementById("messages");
-let button = document.getElementsByClassName("removeBtn")
 let theUser = $('.theUser').html();
 // let theSocketAttach = $('.theActualSockey');
 let button = document.getElementsByClassName('removeBtn');
@@ -169,12 +168,15 @@ function formatTime(dateStr) {
 
 };
 
-<<<<<<< HEAD
 
 
 
 socket.on('exitChat', function(data){
     window.location.href = data;
+});
+
+socket.on('reloadChat', function(){
+    window.location.href;
 });
 
 for (let i = 0; i < button.length; i++) {
@@ -194,11 +196,3 @@ for (let i = 0; i < button.length; i++) {
 //     theChatHeader.append(theMeta);
 
 // }
-=======
-for (let i = 0; i < button.length; i++) {
-    button[i].addEventListener("click", () => {
-        location.reload()
-        socket.emit("kicked", location.reaload(), button[i].value)
-    })
-}
->>>>>>> 7daad09618f756f4d6503a01d5beb512defb035a

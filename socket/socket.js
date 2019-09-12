@@ -72,14 +72,14 @@ function socket(io) {
 
         socket.on("kicked", (data) => {
             if (data == undefined || !data){
-                socket.emit('exitChat', `/userChats/${realUrl}`)
+                socket.emit('reloadChat');
                 // return 
             } else{
                 console.log("YOU WERE KICKED");
                 console.log(data);
                 console.log("THE USER WAS");
                 console.log(io.sockets.connected[socket.id]);
-                io.sockets.connected[data].emit('exitChat', '/allChats'); WORKING
+                io.sockets.connected[data].emit('exitChat', '/allChats');
             }
        
                 })

@@ -18,12 +18,17 @@
     <script src="/javascripts/jquery.min.js"></script>
 </head>
 
+<body>
+<div class="chatTitle">
+    <div>
+        <p style="visibility: hidden;" class="chatroomID">{{lobby._id}}</p>
+    </div>
 
     <div>
     <h2>{{lobby.name}}</h2>
     </div>
 
-       <div class="exiChatBtn"> <a href="/allChats">EXIT</a></div>
+       <div class="exiChatBtn"> <a href="/">EXIT</a></div>
 </div>
 
 <div class="chatCodeRoom">
@@ -55,19 +60,48 @@
             {{/if}}
     </div>
 
-<body>
-    <div class="chatTitle">
+    <div class="window">
+        <div class="top_menu">
+            {{!-- <div class="buttons">
+                <div class="button close"></div>
+                <div class="button minimize"></div>
+                <div class="button maximize"></div>
+            </div> --}}
+        </div>
+        <ul id="messages" class="messages">
+
+        </ul>
+
+        <div class="senderMessage">
+            <i id="typing"></i>
+            <form id="sendForm">
+                <span class="message_input_wrapper">
+                    <input id="message" class="message_input" placeholder="Type your message here..." />
+                </span>
+                <button class="send_message">
+                    Send
+                </button>
+            </form>
+        </div>
         <div>
             {{#if currentUser}}
             <div class="theUser">{{currentUser.username}}</div>
             {{/if}}
         </div>
+    </div>
 
-        <div>
-            <h2>{{lobby.name}}</h2>
-        </div>
 
-        <div> <a href="/">EXIT</a></div>
+    <div class="editor">
+        {{!-- <textarea id="html" placeholder="HTML"></textarea>
+    <textarea id="css" placeholder="CSS"></textarea> --}}
+    <div>
+ <textarea name="code" id="js" placeholder="JavaScript"></textarea>
+    </div>
+    <div class="theRunButton">
+         <button id="runButton">RUN CODE</button>
+    </div>
+       
+
     </div>
 
 </div>
@@ -87,117 +121,164 @@
 
 </html>
 
-        <div class="ListUsers">
-            Users:
-
-            {{#if user }}
-            <li>{{user}}</li>
-            <ul class="chatUserList">
-                {{#each lobby.friends}}
-                <li>{{this}}</li>
-                <form action="/removeFriendChat/{{this}}" method="POST">
-                    <button class="removeBtn" value="{{this}}">Delete</button>
-                </form>
-                {{/each}}
-                <ul class="listOfUserFriends">
-
-                </ul>
-            </ul>
-            {{else}}
-
-            <ul class="chatUserList">
-
-                {{#each lobby.friends}}
-                <li>{{this}}</li>
-                {{!-- <ul class="listOfUserFriends"> --}}
-
-                {{/each}}
-                {{!-- </ul> --}}
-            </ul>
-            {{/if}}
 
 
 
 
-            {{!-- Users:
-            <ul class="chatUserList">
-                {{#each lobby.friends}}
-                <li>{{this}}</li>
-                {{!-- <form action="/removeFriendChat/{{this}}" method="POST">
-                    <button>Delete</button>
-                </form>
-                {{/each}} --}}
-            {{!-- </ul>
-
-
-            <ul class="listOfUserFriends">
-
-            </ul> --}}
 
 
 
 
+
+
+
+
+
+
+
+
+{{!-- <link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel="stylesheet" href="/https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="/https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="/stylesheets/chatroom.css">
+<script src="/javascripts/jquery.min.js"></script>
+
+
+<p style="visibility: hidden;" class="chatroomID">{{_id}}</p>
+
+<div class="window">
+    <div class="top_menu">
+        <div class="buttons">
+            <div class="button close"></div>
+            <div class="button minimize"></div>
+            <div class="button maximize"></div>
         </div>
-
-
-
-        <div class="window">
-            <div class="top_menu">
-                {{!-- <div class="buttons">
-                <div class="button close"></div>
-                <div class="button minimize"></div>
-                <div class="button maximize"></div>
-            </div> --}}
-            </div>
-            <ul id="messages" class="messages">
-
-            </ul>
-
-            <div class="senderMessage">
-                <i id="typing"></i>
-                <form id="sendForm">
-                    <span class="message_input_wrapper">
-                        <input id="message" class="message_input" placeholder="Type your message here..." />
-                    </span>
-                    <button class="send_message">
-                        Send
-                    </button>
-                </form>
-            </div>
-            <div>
-                {{#if currentUser}}
-                <div style="visibility: hidden;" class="theUser">{{currentUser.username}}</div>
-                {{/if}}
-            </div>
-        </div>
-
-
-        <div class="editor">
-            {{!-- <textarea id="html" placeholder="HTML"></textarea>
-    <textarea id="css" placeholder="CSS"></textarea> --}}
-            <div>
-                <textarea name="code" id="js" placeholder="JavaScript"></textarea>
-            </div>
-            <div class="theRunButton">
-                <button id="runButton">RUN CODE</button>
-            </div>
-
-
-        </div>
-
+        <div class="title">{{name}}</div>
     </div>
-    <div id="compilerText">RESULT</div>
+    <ul id="messages" class="messages">
+
+    </ul>
+
+    <div class="bottom_wrapper clearfix">
+        <i id="typing"></i>
+        <form id="sendForm">
+            <div class="message_input_wrapper">
+                <input id="message" class="message_input" placeholder="Type your message here..." />
+            </div>
+            <button class="send_message">
+                Send
+            </button>
+        </form>
+    </div>
+    <div>
+        {{#if currentUser}}
+        <div class="theUser">{{currentUser.username}}</div>
+        {{/if}}
+    </div>
+</div>
 
 
-    <script src="/javascripts/compiler.js"></script>
-    <script src="/javascripts/socket.js"></script>
-    <script src="/https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-    <script src="/javascripts/chat.js"></script>
-    <script src="/javascripts/code.js"></script>
-    {{!-- <script src="/javascripts/lobbyAddFriends.js"></script> --}}
-    {{!-- <script src="/javascripts/editRoom.js"></script> --}}
+<div>
+</div>
 
-</body>
 
-</html>
+
+<div class="editor">
+    <textarea name="code" id="js" placeholder="JavaScript"></textarea>
+    <button id="runButton">RUN CODE</button>
+
+
+
+    <div id="compilerText"></div>
+
+</div> --}}
+{{!-- 
+<a href="/">EXIT</a>
+<script src="/javascripts/compiler.js"></script>
+<script src="/javascripts/socket.js"></script>
+<script src="/https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script src="/javascripts/chat.js"></script>
+<script src="/javascripts/code.js"></script> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel="stylesheet" href="/https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="/https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="/stylesheets/chatroom.css">
+<script src="/javascripts/jquery.min.js"></script>
+
+
+<p style="visibility: hidden;" class="chatroomID">{{_id}}</p>
+
+<div class="window">
+    <div class="top_menu">
+        <div class="buttons">
+            <div class="button close"></div>
+            <div class="button minimize"></div>
+            <div class="button maximize"></div>
+        </div>
+        <div class="title">{{name}}</div>
+    </div>
+    <ul id="messages" class="messages">
+
+    </ul>
+
+    <div class="bottom_wrapper clearfix">
+        <i id="typing"></i>
+        <form id="sendForm">
+            <div class="message_input_wrapper">
+                <input id="message" class="message_input" placeholder="Type your message here..." />
+            </div>
+            <button class="send_message">
+                Send
+            </button>
+        </form>
+    </div>
+    <div>
+        {{#if currentUser}}
+        <div class="theUser">{{currentUser.username}}</div>
+        {{/if}}
+    </div>
+</div>
+
+
+<div>
+</div>
+
+
+
+<div class="editor">
+    <textarea name="code" id="js" placeholder="JavaScript"></textarea>
+    <button id="runButton">RUN CODE</button>
+
+
+
+    <div id="compilerText"></div>
+
+</div> --}}
+{{!-- 
+<a href="/">EXIT</a>
+<script src="/javascripts/compiler.js"></script>
+<script src="/javascripts/socket.js"></script>
+<script src="/https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script src="/javascripts/chat.js"></script>
+<script src="/javascripts/code.js"></script> --}}
