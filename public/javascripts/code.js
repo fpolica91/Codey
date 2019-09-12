@@ -8,3 +8,4 @@ code.onkeyup = () => {
         code: codeVal
     }).catch(err => console.log(err))
 }
+
