@@ -12,22 +12,26 @@ function socket(io) {
     let newCode;
 
     io.on('connection', function (socket) {
+
+         //console.log(socket.client); //THIS PRINTS THE WHOLE SOCKET
+         let theUrl = socket.handshake.headers.referer;
+         // console.log(theUrl);
+         var trueUrl = url.parse(theUrl, true);
+         // console.log(trueUrl.pathname);
+         let hUrl = trueUrl.pathname.split('/');
+         //  console.log(hUrl[2]);
+         let realUrl = hUrl[2];
+
        console.log("SERVER THIS");
        socket.on('set-user', function(data){
         users[socket.id] = data;
         console.log("HELLO WOLRD 2")
         console.log(users);
         // socket.emit('setSocketId', {theId: socket.id, name: data});
-        socket.emit('listOfUsers', users)
+        // socket.emit('listOfUsers', users)
+        io.in(realUrl).emit('listOfUsers', users);
        })
-        //console.log(socket.client); //THIS PRINTS THE WHOLE SOCKET
-        let theUrl = socket.handshake.headers.referer;
-        // console.log(theUrl);
-        var trueUrl = url.parse(theUrl, true);
-        // console.log(trueUrl.pathname);
-        let hUrl = trueUrl.pathname.split('/');
-        //  console.log(hUrl[2]);
-        let realUrl = hUrl[2];
+       
         socket.join(`${realUrl}`)
 
 
