@@ -165,6 +165,10 @@ function formatTime(dateStr) {
 
 };
 
+socket.on('exitChat', function(data){
+    window.location.href = data;
+});
+
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         console.log(button[i].value)
