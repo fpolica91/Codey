@@ -76,7 +76,8 @@ function socket(io) {
                 console.log(data);
                 console.log("THE USER WAS");
                 console.log(io.sockets.connected[socket.id]);
-                io.sockets.connected[data].emit('exitChat', '/allChats'); 
+                // io.sockets.connected[data].emit('exitChat', '/allChats'); 
+                io.to(io.sockets.connected[data]).emit('exitChat', '/allChats');
             }
        
                 })
