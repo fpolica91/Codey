@@ -188,7 +188,7 @@ socket.on('removeBtn', function(data){
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
         console.log(button[i].value);
-        socket.emit("kicked", {user: button[i].name, value:button[i].value});
+        socket.emit("kicked", button[i].name);
     })
 }
 

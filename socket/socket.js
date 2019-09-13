@@ -72,7 +72,7 @@ function socket(io) {
 
         socket.on("kicked", (data) => {
             if (data == undefined || !data){
-                return;
+                return 
             } else{
                 console.log("YOU WERE KICKED");
                 console.log(data);
