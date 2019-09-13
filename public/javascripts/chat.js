@@ -5,6 +5,8 @@ let theUser = $('.theUser').html();
 // let theSocketAttach = $('.theActualSockey');
 let button = document.getElementsByClassName('removeBtn');
 // let theSockedId = $('.theActualSockey').html();
+let theFriendinlist = document.getElementsByClassName('liTheFriend');
+
 
 (function () {
     // let myData = {name: theUser, userId: socket.id};
@@ -54,6 +56,8 @@ socket.on('listOfUsers', function(data){
     });
 })();
 
+
+
 (async function () {
     await fetch("/history")
         .then(data => {
@@ -65,9 +69,9 @@ socket.on('listOfUsers', function(data){
                 //   console.log(data);
                 let li = document.createElement("li");
                 let span = document.createElement("span");
-                if(data.sender === theUser){
+                if (data.sender === theUser) {
                     li.setAttribute('class', 'senderMsg');
-                }else{
+                } else {
                     li.setAttribute('class', 'receiverMsg');
                 }
                 messages.appendChild(li).append(data.message);
@@ -173,10 +177,18 @@ socket.on('exitChat', function(data){
     window.location.href = data;
 });
 
+socket.on('removeBtn', function(data){
+    for (let i = 0; i < theFriendinlist.length; i++) {
+        if(theFriendinlist[i].innerHTML === data){
+            theFriendinlist[i].innerHTML = "";
+        }
+        }
+});
+
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
-        console.log(button[i].value)
-        socket.emit("kicked", button[i].name);
+        console.log(button[i].value);
+        socket.emit("kicked", {user: button[i].name, value:button[i].value});
     })
 }
 
