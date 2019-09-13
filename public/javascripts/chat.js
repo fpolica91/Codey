@@ -10,17 +10,6 @@ let button = document.getElementsByClassName('removeBtn');
     // let myData = {name: theUser, userId: socket.id};
     console.log("CLIENT SIDE");
 
-//TESTING THE ROOM
-socket.on('sendRoom', function(data){
-    console.log(data.theRoom);
-})
-
-//SHOW ACTUAL ROOM
-socket.on('actualRoom', function(data) {
-    console.log("THE ACTUAL ROOM IS");
-    console.log(data.actualRoom);
-});
-
     socket.emit('set-user', theUser);
 
     $("#sendForm").submit(function (e) {
